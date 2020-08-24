@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MontyHall3doors</string>
+    <string name="Main_first">3개의 문중 2개의 문 뒤에는 염소가 1개의 문 뒤에는 당신이 원하는 자동차가 있습니다. 3개의 문중 어떤 문 뒤에 자동자가 있을지 선택 후 Next 버튼을 눌러 주세요.</string>
+    <string name="Main_second">선택하지 않은 두개의 문 중에 하나를 열었습니다. 당신은 선택을 번복할 수 있습니다. 결정을 내린 후 Next 버튼을 눌러 주세요.  </string>
+    <string name="Main_next_btn">Next</string>
 </resources>
