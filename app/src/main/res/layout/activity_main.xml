@@ -62,5 +62,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
+    <ImageView
+        android:id="@+id/Selection1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/circle_check64"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/door1"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/door1"
+        app:layout_constraintTop_toBottomOf="@+id/door1" />
+
+
+    <ImageView
+        android:id="@+id/Selection2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/circle_check64"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/door2"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/door2"
+        app:layout_constraintTop_toBottomOf="@+id/door2" />
+
+    <ImageView
+        android:id="@+id/Selection3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/circle_check64"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/door3"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="@+id/door3"
+        app:layout_constraintTop_toBottomOf="@+id/door3" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
