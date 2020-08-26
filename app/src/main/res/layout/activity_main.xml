@@ -67,6 +67,37 @@
         app:layout_constraintStart_toEndOf="@+id/door2"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/img_door1_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/door1"
+        app:layout_constraintEnd_toEndOf="@+id/door1"
+        app:layout_constraintStart_toStartOf="@+id/door1"
+        app:layout_constraintTop_toTopOf="@+id/door1" />
+
+    <ImageView
+        android:id="@+id/img_door2_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/door2"
+        app:layout_constraintEnd_toEndOf="@+id/door2"
+        app:layout_constraintStart_toStartOf="@+id/door2"
+        app:layout_constraintTop_toTopOf="@+id/door2" />
+
+    <ImageView
+        android:id="@+id/img_door3_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/door3"
+        app:layout_constraintEnd_toEndOf="@+id/door3"
+        app:layout_constraintStart_toStartOf="@+id/door3"
+        app:layout_constraintTop_toTopOf="@+id/door3" />
+
     <ImageView
         android:id="@+id/Selection1"
         android:layout_width="wrap_content"
