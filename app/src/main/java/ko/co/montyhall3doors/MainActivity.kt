@@ -28,11 +28,20 @@ class MainActivity : AppCompatActivity() {
         } else {
             img_door3_back.setImageResource(R.drawable.supercar_64)
             img_door3_back.visibility = View.GONE
-
-
-         
-
+            this.btn_event();
 
         }
+    }
+
+
+    fun btn_event() {
+        btn_next.setOnClickListener {
+
+            if (firstQuestion.visibility == View.VISIBLE) {
+                firstQuestion.visibility = View.GONE
+                SecondQuestion.visibility = View.VISIBLE
+            }
+        }
+
     }
 }
