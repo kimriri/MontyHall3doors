@@ -32,22 +32,53 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />`
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_door1_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/door0"
+        app:layout_constraintEnd_toEndOf="@+id/door0"
+        app:layout_constraintStart_toStartOf="@+id/door0"
+        app:layout_constraintTop_toTopOf="@+id/door0" />
+
+    <ImageView
+        android:id="@+id/img_door2_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/door1"
+        app:layout_constraintEnd_toEndOf="@+id/door1"
+        app:layout_constraintStart_toStartOf="@+id/door1"
+        app:layout_constraintTop_toTopOf="@+id/door1" />
+
+    <ImageView
+        android:id="@+id/img_door3_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/door2"
+        app:layout_constraintEnd_toEndOf="@+id/door2"
+        app:layout_constraintStart_toStartOf="@+id/door2"
+        app:layout_constraintTop_toTopOf="@+id/door2" />
+
 
 
     <ImageView
-        android:id="@+id/door1"
+        android:id="@+id/door0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/door2"
+        app:layout_constraintEnd_toStartOf="@+id/door1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/door2"
+        android:id="@+id/door1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/closed_door_128bit"
@@ -58,47 +89,29 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <ImageView
-        android:id="@+id/door3"
+        android:id="@+id/door2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/door2"
+        app:layout_constraintStart_toEndOf="@+id/door1"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
-        android:id="@+id/img_door1_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/goat_64"
-        app:layout_constraintBottom_toBottomOf="@+id/door1"
-        app:layout_constraintEnd_toEndOf="@+id/door1"
-        app:layout_constraintStart_toStartOf="@+id/door1"
-        app:layout_constraintTop_toTopOf="@+id/door1" />
+
 
     <ImageView
-        android:id="@+id/img_door2_back"
+        android:id="@+id/Selection0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/goat_64"
-        app:layout_constraintBottom_toBottomOf="@+id/door2"
-        app:layout_constraintEnd_toEndOf="@+id/door2"
-        app:layout_constraintStart_toStartOf="@+id/door2"
-        app:layout_constraintTop_toTopOf="@+id/door2" />
-
-    <ImageView
-        android:id="@+id/img_door3_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/goat_64"
-        app:layout_constraintBottom_toBottomOf="@+id/door3"
-        app:layout_constraintEnd_toEndOf="@+id/door3"
-        app:layout_constraintStart_toStartOf="@+id/door3"
-        app:layout_constraintTop_toTopOf="@+id/door3" />
-
+        android:layout_marginTop="16dp"
+        android:src="@drawable/circle_check64"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/img_door1_back"
+        app:layout_constraintStart_toStartOf="@+id/img_door1_back"
+        app:layout_constraintTop_toBottomOf="@+id/door0" />
 
     <ImageView
         android:id="@+id/Selection1"
@@ -107,8 +120,8 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/circle_check64"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/img_door1_back"
-        app:layout_constraintStart_toStartOf="@+id/img_door1_back"
+        app:layout_constraintEnd_toEndOf="@+id/img_door2_back"
+        app:layout_constraintStart_toStartOf="@+id/img_door2_back"
         app:layout_constraintTop_toBottomOf="@+id/door1" />
 
     <ImageView
@@ -118,20 +131,9 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/circle_check64"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/img_door2_back"
-        app:layout_constraintStart_toStartOf="@+id/img_door2_back"
-        app:layout_constraintTop_toBottomOf="@+id/door2" />
-
-    <ImageView
-        android:id="@+id/Selection3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/circle_check64"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/img_door3_back"
         app:layout_constraintStart_toStartOf="@+id/img_door3_back"
-        app:layout_constraintTop_toBottomOf="@+id/door3" />
+        app:layout_constraintTop_toBottomOf="@+id/door2" />
 
     <Button
         android:id="@+id/btn_next"
