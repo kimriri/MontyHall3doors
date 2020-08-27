@@ -36,9 +36,29 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        Select_doors()
         btn_event()
     }
 
+    fun Select_doors() {
+
+        door1.setOnClickListener {
+            Selection1.visibility = View.VISIBLE
+            Selection2.visibility = View.GONE
+            Selection3.visibility = View.GONE
+        }
+
+        door2.setOnClickListener {
+            Selection1.visibility = View.GONE
+            Selection2.visibility = View.VISIBLE
+            Selection3.visibility = View.GONE
+        }
+        door3.setOnClickListener {
+            Selection1.visibility = View.GONE
+            Selection2.visibility = View.GONE
+            Selection3.visibility = View.VISIBLE
+        }
+    }
 
 
     fun btn_event() {
