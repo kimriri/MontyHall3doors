@@ -1,6 +1,7 @@
 package ko.co.montyhall3doors
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun rnds() {
+        door0.visibility = View.VISIBLE
+        door1.visibility = View.VISIBLE
+        door2.visibility = View.VISIBLE
+        btn_next.visibility = View.VISIBLE
+        btn_view_results.visibility = View.GONE
+        btn_restart.visibility = View.GONE
+        Selection0.visibility = View.GONE
+        Selection1.visibility = View.GONE
+        Selection2.visibility = View.GONE
         var first_rnds = (0..2).random()
 
         rnds_string = first_rnds
@@ -86,15 +96,12 @@ class MainActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.btn_next ->
-
                     if (Selection0.visibility == View.GONE && Selection1.visibility == View.GONE && Selection2.visibility == View.GONE) {
 
-                        val tot = Toast.makeText(
-                            this@MainActivity,
-                            "1개의 문을 선택 해 주세요.",
-                            Toast.LENGTH_SHORT
-                        )
+                        val tot =
+                            Toast.makeText(this@MainActivity, "1개의 문을 선택해 주세요", Toast.LENGTH_SHORT)
                         tot.show()
+
                     } else {
 
 
@@ -104,72 +111,76 @@ class MainActivity : AppCompatActivity() {
                             LastQuestion.visibility = View.GONE
 
 
-                            if (Selection0.visibility.equals(View.VISIBLE)) {
-                                when {
-                                    rnds_string.equals(0) -> {  // 0번에 차량이 있다면
+                            when {
+                                Selection0.visibility.equals(View.VISIBLE) -> {
+                                    when {
+                                        rnds_string.equals(0) -> {
 
-                                        val Second_rnds = intArrayOf(1, 2).random()
-                                        when (Second_rnds) {
-                                            1 -> {
-                                                door1.visibility = View.INVISIBLE
-                                            }
-                                            2 -> {
-                                                door2.visibility = View.INVISIBLE
+                                            val Second_rnds = intArrayOf(1, 2).random()
+                                            when (Second_rnds) {
+                                                1 -> {
+                                                    door1.visibility = View.INVISIBLE
+                                                }
+                                                2 -> {
+                                                    door2.visibility = View.INVISIBLE
+                                                }
                                             }
                                         }
-                                    }
-                                    rnds_string.equals(1) -> { // 2번에 차량이 있다면
-                                        door2.visibility = View.INVISIBLE
-                                    }
-                                    rnds_string.equals(2) -> {  //3번에 차가 있을 경우
-                                        door1.visibility = View.INVISIBLE
+                                        rnds_string.equals(1) -> {
+                                            door2.visibility = View.INVISIBLE
+                                        }
+                                        rnds_string.equals(2) -> {
+                                            door1.visibility = View.INVISIBLE
 
+                                        }
                                     }
                                 }
-                            } else if (Selection1.visibility.equals(View.VISIBLE)) {
-                                when {
-                                    rnds_string.equals(1) -> {  // 0번에 차량이 있다면
+                                Selection1.visibility.equals(View.VISIBLE) -> {
+                                    when {
+                                        rnds_string.equals(1) -> {
 
-                                        val Second_rnds = intArrayOf(0, 2).random()
-                                        when (Second_rnds) {
-                                            0 -> {
-                                                door0.visibility = View.INVISIBLE
-                                            }
-                                            2 -> {
-                                                door2.visibility = View.INVISIBLE
+                                            val Second_rnds = intArrayOf(0, 2).random()
+                                            when (Second_rnds) {
+                                                0 -> {
+                                                    door0.visibility = View.INVISIBLE
+                                                }
+                                                2 -> {
+                                                    door2.visibility = View.INVISIBLE
+                                                }
                                             }
                                         }
-                                    }
-                                    rnds_string.equals(0) -> {
-                                        door2.visibility = View.INVISIBLE
-                                    }
-                                    rnds_string.equals(2) -> {
-                                        door0.visibility = View.INVISIBLE
+                                        rnds_string.equals(0) -> {
+                                            door2.visibility = View.INVISIBLE
+                                        }
+                                        rnds_string.equals(2) -> {
+                                            door0.visibility = View.INVISIBLE
 
+                                        }
                                     }
+
                                 }
+                                Selection2.visibility.equals(View.VISIBLE) -> {
+                                    when {
+                                        rnds_string.equals(2) -> {
 
-                            } else if (Selection2.visibility.equals(View.VISIBLE)) {
-                                when {
-                                    rnds_string.equals(2) -> {  //
-
-                                        val Second_rnds = intArrayOf(0, 1).random()
-                                        when (Second_rnds) {
-                                            0 -> {
-                                                door0.visibility = View.INVISIBLE
-                                            }
-                                            1 -> {
-                                                door1.visibility = View.INVISIBLE
+                                            val Second_rnds = intArrayOf(0, 1).random()
+                                            when (Second_rnds) {
+                                                0 -> {
+                                                    door0.visibility = View.INVISIBLE
+                                                }
+                                                1 -> {
+                                                    door1.visibility = View.INVISIBLE
+                                                }
                                             }
                                         }
-                                    }
-                                    rnds_string.equals(0) -> {
-                                        door1.visibility = View.INVISIBLE
-                                    }
-                                    rnds_string.equals(1) -> {
+                                        rnds_string.equals(0) -> {
+                                            door1.visibility = View.INVISIBLE
+                                        }
+                                        rnds_string.equals(1) -> {
 
-                                        door0.visibility = View.INVISIBLE
+                                            door0.visibility = View.INVISIBLE
 
+                                        }
                                     }
                                 }
                             }
@@ -194,16 +205,18 @@ class MainActivity : AppCompatActivity() {
 
                             } else {
                                 cont++
-                                sum++
+
                             }
+                            Log.e("count", "$cont 개")
                         }
                     }
+
+
                 R.id.btn_restart -> {
-                    firstQuestion.visibility == View.VISIBLE
-                    SecondQuestion.visibility == View.GONE
+                    LastQuestion.visibility = View.INVISIBLE
+                    firstQuestion.visibility = View.VISIBLE
                     rnds()
                 }
-
             }
         }
     }
