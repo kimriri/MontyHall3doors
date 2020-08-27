@@ -74,6 +74,15 @@ class MainActivity : AppCompatActivity() {
                             when (Second_rnds) {
                                 1 -> {
                                     door0.visibility = View.INVISIBLE
+                    if (Selection0.visibility == View.GONE && Selection1.visibility == View.GONE && Selection2.visibility == View.GONE) {
+
+                        val tot = Toast.makeText(
+                            this@MainActivity,
+                            "1개의 문을 선택 해 주세요.",
+                            Toast.LENGTH_SHORT
+                        )
+                        tot.show()
+                    } else {
                                 }
                                 2 -> {
                                     door2.visibility = View.INVISIBLE
