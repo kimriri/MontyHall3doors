@@ -149,4 +149,24 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
+    <Button
+        android:id="@+id/btn_restart"
+        android:layout_width="148dp"
+        android:layout_height="49dp"
+        android:visibility="gone"
+        android:text="@string/Main_restart_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_next"
+        app:layout_constraintEnd_toStartOf="@+id/img_door2_back"
+        app:layout_constraintStart_toStartOf="@+id/img_door1_back" />
+
+    <Button
+        android:id="@+id/btn_view_results"
+        android:layout_width="148dp"
+        android:layout_height="49dp"
+        android:visibility="gone"
+        android:text="@string/Main_view_results_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_next"
+        app:layout_constraintEnd_toEndOf="@+id/img_door3_back"
+        app:layout_constraintStart_toEndOf="@+id/img_door2_back" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
