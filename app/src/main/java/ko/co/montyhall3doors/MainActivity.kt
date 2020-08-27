@@ -10,28 +10,35 @@ class MainActivity : AppCompatActivity() {
 
     var i: Int = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        var Selectdoor: String
 
         val first_rnds = (0..2).random()
         print("$first_rnds" + "입니다")
 
-        if (first_rnds == 0) {
-            img_door1_back.setImageResource(R.drawable.supercar_64)
-            img_door1_back.visibility = View.GONE
+        when (first_rnds) {
+            0 -> {
+                img_door1_back.setImageResource(R.drawable.supercar_64)
+                img_door1_back.visibility = View.GONE
 
-        } else if (first_rnds == 1) {
-            img_door2_back.setImageResource(R.drawable.supercar_64)
-            img_door2_back.visibility = View.GONE
-        } else {
-            img_door3_back.setImageResource(R.drawable.supercar_64)
-            img_door3_back.visibility = View.GONE
-            this.btn_event();
+            }
+            1 -> {
+                img_door2_back.setImageResource(R.drawable.supercar_64)
+                img_door2_back.visibility = View.GONE
+            }
+            else -> {
+                img_door3_back.setImageResource(R.drawable.supercar_64)
+                img_door3_back.visibility = View.GONE
+
+            }
 
         }
+        btn_event()
     }
+
 
 
     fun btn_event() {
@@ -44,4 +51,10 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 }
+
+
+
+
