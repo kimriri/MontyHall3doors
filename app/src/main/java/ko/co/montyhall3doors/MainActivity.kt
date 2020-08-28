@@ -92,6 +92,29 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun Popup() {
+
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.main_popup,null)
+        val textView : TextView = view.findViewById(R.id.main_popup)
+        textView.text = "총 $cont 번 시도 하여서 $percentage 의 확률을 얻었습니다."
+
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("결과")
+            .setPositiveButton("보기") { dialog, which ->
+                Toast.makeText(applicationContext,"결과보여주기",Toast.LENGTH_SHORT)
+            }
+            .setNegativeButton("취소",null)
+            .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
+
+
+    //   버튼 이벤트 -  > 바꿧는지 바꾸지 않았는지  확인 하기
+    // 바꿧다면 바꿧을 때의 확률만 계산하기
+
     inner class BtnEvent : View.OnClickListener {
         override fun onClick(v: View?) {
             when (v?.id) {
