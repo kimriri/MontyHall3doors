@@ -21,7 +21,9 @@ class MainActivity : AppCompatActivity() {
 
     var sum: Long = 0
     var cont: Long = 0
+    var percentage: Double = 0.0
     var rnds_string = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
