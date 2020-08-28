@@ -287,6 +287,15 @@ class MainActivity : AppCompatActivity() {
                     firstQuestion.visibility = View.VISIBLE
                     rnds()
                 }
+
+                R.id.btn_view_results -> {
+
+                    percentage = (sum.toDouble() / cont.toDouble()) * 100
+
+                    Log.e("확률0은", " sum 은  $sum 이고  cont는 $cont 입니다.  $percentage 입니다.")
+
+                    Popup()
+                }
             }
         }
     }
