@@ -130,6 +130,8 @@ class MainActivity : AppCompatActivity() {
     // 바꿧다면 바꿧을 때의 확률만 계산하기
 
     inner class BtnEvent : View.OnClickListener {
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        @SuppressLint("ResourceType")
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.btn_next ->
@@ -226,20 +228,51 @@ class MainActivity : AppCompatActivity() {
 
                             firstQuestion.visibility = View.GONE
                             SecondQuestion.visibility = View.GONE
-                            LastQuestion.visibility = View.VISIBLE
+                            LastQuestion.visibility = View.VISIBLE  // 마지막 지문이 보인다.
                             btn_next.visibility = View.INVISIBLE
                             btn_restart.visibility = View.VISIBLE
                             btn_view_results.visibility = View.VISIBLE
 
-                            door0.visibility = View.INVISIBLE
+                            door0.visibility = View.INVISIBLE  // 문 3개가 모두 열린다
                             door1.visibility = View.INVISIBLE
                             door2.visibility = View.INVISIBLE
 
 
-                            if (Selection0.visibility == View.VISIBLE && img_door1_back.equals(R.drawable.supercar_64)) {
+                            val drawable = getDrawable(R.drawable.supercar_64)
+                            val bitmapDrawable = drawable as BitmapDrawable
+                            val bitmap = bitmapDrawable.bitmap
+
+                            val drawable1 = img_door1_back.drawable
+                            val bitmapDrawable1 = drawable1 as BitmapDrawable
+                            val bitmap1 = bitmapDrawable1.bitmap
+
+                            val drawable2 = img_door2_back.drawable
+                            val bitmapDrawable2 = drawable2 as BitmapDrawable
+                            val bitmap2 = bitmapDrawable2.bitmap
+
+                            val drawable3 = img_door3_back.drawable
+                            val bitmapDrawable3 = drawable3 as BitmapDrawable
+                            val bitmap3 = bitmapDrawable3.bitmap
+
+
+                            if (Selection0.visibility == View.VISIBLE && bitmap == bitmap1) {
+
                                 cont++
                                 sum++
+                                Log.e("sum", "$sum 개")
+                            } else if (Selection1.visibility == View.VISIBLE && bitmap == bitmap2) {
 
+                                cont++
+                                sum++
+                                Log.e("sum", "$sum 개")
+                            } else if (Selection2.visibility == View.VISIBLE && bitmap.equals(
+                                    bitmap3
+                                )
+                            ) {
+
+                                cont++
+                                sum++
+                                Log.e("sum", "$sum 개")
                             } else {
                                 cont++
 
