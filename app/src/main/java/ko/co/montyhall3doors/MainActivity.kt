@@ -102,19 +102,23 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("ShowToast", "SetTextI18n")
     private fun Popup() {
 
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.main_popup,null)
-        val textView : TextView = view.findViewById(R.id.main_popup)
-        textView.text = "총 $cont 번 시도 하여서 $percentage 의 확률을 얻었습니다."
+        val view = inflater.inflate(R.layout.main_popup, null)
+        val textView: TextView = view.findViewById(R.id.main_popup)
+        val Percent = String.format("%.2f", percentage)
 
+        Log.e("확률은", "$Percent 입니다.")
+
+        textView.text = "총 $cont 번 시도 하여서 약 $Percent 의 확률을 얻었습니다."
         val alertDialog = AlertDialog.Builder(this)
             .setTitle("결과")
             .setPositiveButton("보기") { dialog, which ->
-                Toast.makeText(applicationContext,"결과보여주기",Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, "결과보여주기", Toast.LENGTH_SHORT)
             }
-            .setNegativeButton("취소",null)
+            .setNegativeButton("취소", null)
             .create()
 
         alertDialog.setView(view)
