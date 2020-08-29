@@ -22,13 +22,14 @@ class MainActivity : AppCompatActivity() {
     var sum: Long = 0
     var cont: Long = 0
     var percentage: Double = 0.0
-    var rnds_string = 0
-
+    var rnds_start = 0
+    var Select = 0
+    var finalSelect = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var btn_event = BtnEvent();
+        val btn_event = BtnEvent();
         btn_next.setOnClickListener(btn_event);
         btn_restart.setOnClickListener(btn_event);
         btn_view_results.setOnClickListener(btn_event)
@@ -46,16 +47,16 @@ class MainActivity : AppCompatActivity() {
         Selection0.visibility = View.GONE
         Selection1.visibility = View.GONE
         Selection2.visibility = View.GONE
-        var first_rnds = (0..2).random()
+        val first_rnds = (0..2).random()
 
-        rnds_string = first_rnds
+        rnds_start = first_rnds
         Start_rnds()
         Select_doors()
     }
 
     fun Start_rnds() {
 
-        when (rnds_string) {
+        when (rnds_start) {
 
             0 -> {
                 img_door1_back.setImageResource(R.drawable.supercar_64)
@@ -143,7 +144,6 @@ class MainActivity : AppCompatActivity() {
 
                     } else {
 
-
                         if (firstQuestion.visibility == View.VISIBLE) {
                             firstQuestion.visibility = View.GONE
                             SecondQuestion.visibility = View.VISIBLE
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
                             when {
                                 Selection0.visibility.equals(View.VISIBLE) -> {
                                     when {
-                                        rnds_string.equals(0) -> {
+                                        rnds_start.equals(0) -> {  // 0번에 차가 있을 경우
 
                                             val Second_rnds = intArrayOf(1, 2).random()
                                             when (Second_rnds) {
@@ -165,18 +165,21 @@ class MainActivity : AppCompatActivity() {
                                                 }
                                             }
                                         }
-                                        rnds_string.equals(1) -> {
+                                        rnds_start.equals(1) -> {
                                             door2.visibility = View.INVISIBLE
                                         }
-                                        rnds_string.equals(2) -> {
+                                        rnds_start.equals(2) -> {
                                             door1.visibility = View.INVISIBLE
 
                                         }
                                     }
+
                                 }
+
+
                                 Selection1.visibility.equals(View.VISIBLE) -> {
                                     when {
-                                        rnds_string.equals(1) -> {
+                                        rnds_start.equals(1) -> {
 
                                             val Second_rnds = intArrayOf(0, 2).random()
                                             when (Second_rnds) {
@@ -188,10 +191,10 @@ class MainActivity : AppCompatActivity() {
                                                 }
                                             }
                                         }
-                                        rnds_string.equals(0) -> {
+                                        rnds_start.equals(0) -> {
                                             door2.visibility = View.INVISIBLE
                                         }
-                                        rnds_string.equals(2) -> {
+                                        rnds_start.equals(2) -> {
                                             door0.visibility = View.INVISIBLE
 
                                         }
@@ -200,7 +203,7 @@ class MainActivity : AppCompatActivity() {
                                 }
                                 Selection2.visibility.equals(View.VISIBLE) -> {
                                     when {
-                                        rnds_string.equals(2) -> {
+                                        rnds_start.equals(2) -> {
 
                                             val Second_rnds = intArrayOf(0, 1).random()
                                             when (Second_rnds) {
@@ -212,19 +215,36 @@ class MainActivity : AppCompatActivity() {
                                                 }
                                             }
                                         }
-                                        rnds_string.equals(0) -> {
+                                        rnds_start.equals(0) -> {
                                             door1.visibility = View.INVISIBLE
                                         }
-                                        rnds_string.equals(1) -> {
-
+                                        rnds_start.equals(1) -> {
                                             door0.visibility = View.INVISIBLE
-
                                         }
                                     }
+
                                 }
                             }
 
+                            when (View.VISIBLE) {
+                                Selection0.visibility -> {
+                                    Select = 0
+                                }
+                                Selection1.visibility -> {
+
+                                    Select = 1
+                                }
+                                Selection2.visibility -> {
+
+                                    Select = 2
+                                }
+
+                            }
+                            Log.e("파이널", "$Select 1입니다")
                         } else if (SecondQuestion.visibility == View.VISIBLE) {
+
+                            // 숫자가 바꼇는지 확인하고 바꼇으면 sum ++ 를 해준다 .
+
 
                             firstQuestion.visibility = View.GONE
                             SecondQuestion.visibility = View.GONE
@@ -255,24 +275,45 @@ class MainActivity : AppCompatActivity() {
                             val bitmap3 = bitmapDrawable3.bitmap
 
 
-                            if (Selection0.visibility == View.VISIBLE && bitmap == bitmap1) {
+                            when (View.VISIBLE) {
+                                Selection0.visibility -> {
+                                    finalSelect = 0
+                                }
+                                Selection1.visibility -> {
 
+                                    finalSelect = 1
+                                }
+                                Selection2.visibility -> {
+
+                                    finalSelect = 2
+
+                                }
+
+                            }
+                            Log.e("파이널", "$finalSelect 입니다  ")
+                            if (Selection0.visibility == View.VISIBLE && bitmap == bitmap1) {
                                 cont++
-                                sum++
+                                if (Select != finalSelect ) {
+
+                                    Log.e("파이널", "$Select 는 $Select 과 $finalSelect  입니다 1")
+                                    sum++
+                                }
                                 Log.e("sum", "$sum 개")
                             } else if (Selection1.visibility == View.VISIBLE && bitmap == bitmap2) {
-
                                 cont++
-                                sum++
-                                Log.e("sum", "$sum 개")
-                            } else if (Selection2.visibility == View.VISIBLE && bitmap.equals(
-                                    bitmap3
-                                )
-                            ) {
+                                if (Select != finalSelect) {
 
-                                cont++
-                                sum++
+                                    sum++
+
+                                    Log.e("파이널", "$Select 과 $finalSelect  입니다 2")
+                                }
                                 Log.e("sum", "$sum 개")
+                            } else if (Selection2.visibility == View.VISIBLE && bitmap == bitmap3) {
+                                cont++
+                                if (Select != finalSelect) {
+                                    sum++
+                                    Log.e("파이널", "$Select 과 $finalSelect  입니다3")
+                                }
                             } else {
                                 cont++
 
