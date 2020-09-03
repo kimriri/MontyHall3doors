@@ -8,20 +8,20 @@
 
 
     <Button
-        android:id="@+id/AutoPlay"
+        android:id="@+id/btn_main_auto_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Main_AutoPlay"
+        android:text="@string/btn_main_auto_play"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/firstQuestion"
+        android:id="@+id/tv_main_question1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:padding="10dp"
-        android:text="@string/Main_first"
+        android:text="@string/tv_main_question1"
         android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,12 +30,12 @@
 
 
     <TextView
-        android:id="@+id/SecondQuestion"
+        android:id="@+id/tv_main_question2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:padding="10dp"
-        android:text="@string/Main_second"
+        android:text="@string/tv_main_question2"
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,12 +43,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/LastQuestion"
+        android:id="@+id/tv_main_question3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:padding="10dp"
-        android:text="@string/Main_LastQuestion"
+        android:text="@string/tv_main_question3"
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,54 +57,54 @@
 
 
     <ImageView
+        android:id="@+id/img_door0_back"
+        android:layout_width="41dp"
+        android:layout_height="51dp"
+        android:src="@drawable/goat_64"
+        app:layout_constraintBottom_toBottomOf="@+id/img_door0"
+        app:layout_constraintEnd_toEndOf="@+id/img_door0"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="@+id/img_door0"
+        app:layout_constraintTop_toTopOf="@+id/img_door0"
+        app:layout_constraintVertical_bias="0.493" />
+
+    <ImageView
         android:id="@+id/img_door1_back"
         android:layout_width="41dp"
         android:layout_height="51dp"
         android:src="@drawable/goat_64"
-        app:layout_constraintBottom_toBottomOf="@+id/door0"
-        app:layout_constraintEnd_toEndOf="@+id/door0"
+        app:layout_constraintBottom_toBottomOf="@+id/img_door1"
+        app:layout_constraintEnd_toEndOf="@+id/img_door1"
         app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="@+id/door0"
-        app:layout_constraintTop_toTopOf="@+id/door0"
-        app:layout_constraintVertical_bias="0.493" />
+        app:layout_constraintStart_toStartOf="@+id/img_door1"
+        app:layout_constraintTop_toTopOf="@+id/img_door1"
+        app:layout_constraintVertical_bias="0.506" />
 
     <ImageView
         android:id="@+id/img_door2_back"
         android:layout_width="41dp"
         android:layout_height="51dp"
         android:src="@drawable/goat_64"
-        app:layout_constraintBottom_toBottomOf="@+id/door1"
-        app:layout_constraintEnd_toEndOf="@+id/door1"
+        app:layout_constraintBottom_toBottomOf="@+id/img_door2"
+        app:layout_constraintEnd_toEndOf="@+id/img_door2"
         app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="@+id/door1"
-        app:layout_constraintTop_toTopOf="@+id/door1"
-        app:layout_constraintVertical_bias="0.506" />
-
-    <ImageView
-        android:id="@+id/img_door3_back"
-        android:layout_width="41dp"
-        android:layout_height="51dp"
-        android:src="@drawable/goat_64"
-        app:layout_constraintBottom_toBottomOf="@+id/door2"
-        app:layout_constraintEnd_toEndOf="@+id/door2"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="@+id/door2"
-        app:layout_constraintTop_toTopOf="@+id/door2"
+        app:layout_constraintStart_toStartOf="@+id/img_door2"
+        app:layout_constraintTop_toTopOf="@+id/img_door2"
         app:layout_constraintVertical_bias="0.493" />
 
     <ImageView
-        android:id="@+id/door0"
+        android:id="@+id/img_door0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/door1"
+        app:layout_constraintEnd_toStartOf="@+id/img_door1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/door1"
+        android:id="@+id/img_door1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/closed_door_128bit"
@@ -115,19 +115,31 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <ImageView
-        android:id="@+id/door2"
+        android:id="@+id/img_door2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/door1"
+        app:layout_constraintStart_toEndOf="@+id/img_door1"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
-        android:id="@+id/Selection0"
+        android:id="@+id/iv_selection0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/circle_check64"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/img_door0_back"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="@+id/img_door0_back"
+        app:layout_constraintTop_toBottomOf="@+id/img_door0" />
+
+    <ImageView
+        android:id="@+id/iv_selection1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -136,31 +148,19 @@
         app:layout_constraintEnd_toEndOf="@+id/img_door1_back"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/img_door1_back"
-        app:layout_constraintTop_toBottomOf="@+id/door0" />
+        app:layout_constraintTop_toBottomOf="@+id/img_door1" />
 
     <ImageView
-        android:id="@+id/Selection1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/circle_check64"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/img_door2_back"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/img_door2_back"
-        app:layout_constraintTop_toBottomOf="@+id/door1" />
-
-    <ImageView
-        android:id="@+id/Selection2"
+        android:id="@+id/iv_selection2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:src="@drawable/circle_check64"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/img_door3_back"
+        app:layout_constraintEnd_toEndOf="@+id/img_door2_back"
         app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="@+id/img_door3_back"
-        app:layout_constraintTop_toBottomOf="@+id/door2" />
+        app:layout_constraintStart_toStartOf="@+id/img_door2_back"
+        app:layout_constraintTop_toBottomOf="@+id/img_door2" />
 
     <Button
         android:id="@+id/btn_next"
@@ -169,7 +169,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="36dp"
-        android:text="@string/Main_next_btn"
+        android:text="@string/btn_main_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -180,20 +180,20 @@
         android:id="@+id/btn_restart"
         android:layout_width="148dp"
         android:layout_height="49dp"
-        android:text="@string/Main_restart_btn"
+        android:text="@string/btn_main_restart"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/btn_next"
-        app:layout_constraintEnd_toStartOf="@+id/img_door2_back"
-        app:layout_constraintStart_toStartOf="@+id/img_door1_back" />
+        app:layout_constraintEnd_toStartOf="@+id/img_door1_back"
+        app:layout_constraintStart_toStartOf="@+id/img_door0_back" />
 
     <Button
         android:id="@+id/btn_view_results"
         android:layout_width="148dp"
         android:layout_height="49dp"
-        android:text="@string/Main_view_results_btn"
+        android:text="@string/btn_main_view_results"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/btn_next"
-        app:layout_constraintEnd_toEndOf="@+id/img_door3_back"
-        app:layout_constraintStart_toEndOf="@+id/img_door2_back" />
+        app:layout_constraintEnd_toEndOf="@+id/img_door2_back"
+        app:layout_constraintStart_toEndOf="@+id/img_door1_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
