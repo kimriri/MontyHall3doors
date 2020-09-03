@@ -33,20 +33,26 @@ class MainActivity : AppCompatActivity() {
         btn_next.setOnClickListener(btn_event);
         btn_restart.setOnClickListener(btn_event);
         btn_view_results.setOnClickListener(btn_event)
-        rnds()
+        Start()
 
     }
 
-    fun rnds() {
-        door0.visibility = View.VISIBLE
-        door1.visibility = View.VISIBLE
-        door2.visibility = View.VISIBLE
+    fun Start() {
+        tv_main_question1.visibility = View.INVISIBLE
+        tv_main_question2.visibility = View.INVISIBLE
+        img_door0.visibility = View.VISIBLE
+        img_door1.visibility = View.VISIBLE
+        img_door2.visibility = View.VISIBLE
         btn_next.visibility = View.VISIBLE
         btn_view_results.visibility = View.GONE
         btn_restart.visibility = View.GONE
-        Selection0.visibility = View.GONE
-        Selection1.visibility = View.GONE
-        Selection2.visibility = View.GONE
+        iv_selection0.visibility = View.GONE
+        iv_selection1.visibility = View.GONE
+        iv_selection2.visibility = View.GONE
+        rnds()
+    }
+
+    fun rnds() {
         val first_rnds = (0..2).random()
 
         rnds_start = first_rnds
@@ -59,23 +65,23 @@ class MainActivity : AppCompatActivity() {
         when (rnds_start) {
 
             0 -> {
-                img_door1_back.setImageResource(R.drawable.supercar_64)
+                img_door0_back.setImageResource(R.drawable.supercar_64)
+                img_door1_back.setImageResource(R.drawable.goat_64)
                 img_door2_back.setImageResource(R.drawable.goat_64)
-                img_door3_back.setImageResource(R.drawable.goat_64)
-                img_door1_back.visibility = View.VISIBLE
+                img_door0_back.visibility = View.VISIBLE
 
             }
             1 -> {
-                img_door2_back.setImageResource(R.drawable.supercar_64)
-                img_door1_back.setImageResource(R.drawable.goat_64)
-                img_door3_back.setImageResource(R.drawable.goat_64)
-                img_door2_back.visibility = View.VISIBLE
+                img_door1_back.setImageResource(R.drawable.supercar_64)
+                img_door0_back.setImageResource(R.drawable.goat_64)
+                img_door2_back.setImageResource(R.drawable.goat_64)
+                img_door1_back.visibility = View.VISIBLE
             }
             else -> {
-                img_door3_back.setImageResource(R.drawable.supercar_64)
-                img_door2_back.setImageResource(R.drawable.goat_64)
+                img_door2_back.setImageResource(R.drawable.supercar_64)
                 img_door1_back.setImageResource(R.drawable.goat_64)
-                img_door3_back.visibility = View.VISIBLE
+                img_door0_back.setImageResource(R.drawable.goat_64)
+                img_door2_back.visibility = View.VISIBLE
 
             }
 
@@ -84,21 +90,21 @@ class MainActivity : AppCompatActivity() {
 
     fun Select_doors() {
 
-        door0.setOnClickListener {
-            Selection0.visibility = View.VISIBLE
-            Selection1.visibility = View.GONE
-            Selection2.visibility = View.GONE
+        img_door0.setOnClickListener {
+            iv_selection0.visibility = View.VISIBLE
+            iv_selection1.visibility = View.GONE
+            iv_selection2.visibility = View.GONE
         }
 
-        door1.setOnClickListener {
-            Selection0.visibility = View.GONE
-            Selection1.visibility = View.VISIBLE
-            Selection2.visibility = View.GONE
+        img_door1.setOnClickListener {
+            iv_selection0.visibility = View.GONE
+            iv_selection1.visibility = View.VISIBLE
+            iv_selection2.visibility = View.GONE
         }
-        door2.setOnClickListener {
-            Selection0.visibility = View.GONE
-            Selection1.visibility = View.GONE
-            Selection2.visibility = View.VISIBLE
+        img_door2.setOnClickListener {
+            iv_selection0.visibility = View.GONE
+            iv_selection1.visibility = View.GONE
+            iv_selection2.visibility = View.VISIBLE
         }
     }
 
@@ -136,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.btn_next ->
-                    if (Selection0.visibility == View.GONE && Selection1.visibility == View.GONE && Selection2.visibility == View.GONE) {
+                    if (iv_selection0.visibility == View.GONE && iv_selection1.visibility == View.GONE && iv_selection2.visibility == View.GONE) {
 
                         val tot =
                             Toast.makeText(this@MainActivity, "1개의 문을 선택해 주세요", Toast.LENGTH_SHORT)
@@ -144,32 +150,32 @@ class MainActivity : AppCompatActivity() {
 
                     } else {
 
-                        if (firstQuestion.visibility == View.VISIBLE) {
-                            firstQuestion.visibility = View.GONE
-                            SecondQuestion.visibility = View.VISIBLE
-                            LastQuestion.visibility = View.GONE
+                        if (tv_main_question0.visibility == View.VISIBLE) {
+                            tv_main_question0.visibility = View.GONE
+                            tv_main_question1.visibility = View.VISIBLE
+                            tv_main_question2.visibility = View.GONE
 
 
                             when {
-                                Selection0.visibility.equals(View.VISIBLE) -> {
+                                iv_selection0.visibility.equals(View.VISIBLE) -> {
                                     when {
                                         rnds_start.equals(0) -> {  // 0번에 차가 있을 경우
 
                                             val Second_rnds = intArrayOf(1, 2).random()
                                             when (Second_rnds) {
                                                 1 -> {
-                                                    door1.visibility = View.INVISIBLE
+                                                    img_door1.visibility = View.INVISIBLE
                                                 }
                                                 2 -> {
-                                                    door2.visibility = View.INVISIBLE
+                                                    img_door2.visibility = View.INVISIBLE
                                                 }
                                             }
                                         }
                                         rnds_start.equals(1) -> {
-                                            door2.visibility = View.INVISIBLE
+                                            img_door2.visibility = View.INVISIBLE
                                         }
                                         rnds_start.equals(2) -> {
-                                            door1.visibility = View.INVISIBLE
+                                            img_door1.visibility = View.INVISIBLE
 
                                         }
                                     }
@@ -177,49 +183,49 @@ class MainActivity : AppCompatActivity() {
                                 }
 
 
-                                Selection1.visibility.equals(View.VISIBLE) -> {
+                                iv_selection1.visibility.equals(View.VISIBLE) -> {
                                     when {
                                         rnds_start.equals(1) -> {
 
                                             val Second_rnds = intArrayOf(0, 2).random()
                                             when (Second_rnds) {
                                                 0 -> {
-                                                    door0.visibility = View.INVISIBLE
+                                                    img_door0.visibility = View.INVISIBLE
                                                 }
                                                 2 -> {
-                                                    door2.visibility = View.INVISIBLE
+                                                    img_door2.visibility = View.INVISIBLE
                                                 }
                                             }
                                         }
                                         rnds_start.equals(0) -> {
-                                            door2.visibility = View.INVISIBLE
+                                            img_door2.visibility = View.INVISIBLE
                                         }
                                         rnds_start.equals(2) -> {
-                                            door0.visibility = View.INVISIBLE
+                                            img_door0.visibility = View.INVISIBLE
 
                                         }
                                     }
 
                                 }
-                                Selection2.visibility.equals(View.VISIBLE) -> {
+                                iv_selection2.visibility.equals(View.VISIBLE) -> {
                                     when {
                                         rnds_start.equals(2) -> {
 
                                             val Second_rnds = intArrayOf(0, 1).random()
                                             when (Second_rnds) {
                                                 0 -> {
-                                                    door0.visibility = View.INVISIBLE
+                                                    img_door0.visibility = View.INVISIBLE
                                                 }
                                                 1 -> {
-                                                    door1.visibility = View.INVISIBLE
+                                                    img_door1.visibility = View.INVISIBLE
                                                 }
                                             }
                                         }
                                         rnds_start.equals(0) -> {
-                                            door1.visibility = View.INVISIBLE
+                                            img_door1.visibility = View.INVISIBLE
                                         }
                                         rnds_start.equals(1) -> {
-                                            door0.visibility = View.INVISIBLE
+                                            img_door0.visibility = View.INVISIBLE
                                         }
                                     }
 
@@ -227,63 +233,63 @@ class MainActivity : AppCompatActivity() {
                             }
 
                             when (View.VISIBLE) {
-                                Selection0.visibility -> {
+                                iv_selection0.visibility -> {
                                     Select = 0
                                 }
-                                Selection1.visibility -> {
+                                iv_selection1.visibility -> {
 
                                     Select = 1
                                 }
-                                Selection2.visibility -> {
+                                iv_selection2.visibility -> {
 
                                     Select = 2
                                 }
 
                             }
                             Log.e("파이널", "$Select 1입니다")
-                        } else if (SecondQuestion.visibility == View.VISIBLE) {
+                        } else if (tv_main_question1.visibility == View.VISIBLE) {
 
                             // 숫자가 바꼇는지 확인하고 바꼇으면 sum ++ 를 해준다 .
 
 
-                            firstQuestion.visibility = View.GONE
-                            SecondQuestion.visibility = View.GONE
-                            LastQuestion.visibility = View.VISIBLE  // 마지막 지문이 보인다.
+                            tv_main_question0.visibility = View.GONE
+                            tv_main_question1.visibility = View.GONE
+                            tv_main_question2.visibility = View.VISIBLE
                             btn_next.visibility = View.INVISIBLE
                             btn_restart.visibility = View.VISIBLE
                             btn_view_results.visibility = View.VISIBLE
 
-                            door0.visibility = View.INVISIBLE  // 문 3개가 모두 열린다
-                            door1.visibility = View.INVISIBLE
-                            door2.visibility = View.INVISIBLE
+                            img_door0.visibility = View.INVISIBLE
+                            img_door1.visibility = View.INVISIBLE
+                            img_door2.visibility = View.INVISIBLE
 
 
                             val drawable = getDrawable(R.drawable.supercar_64)
                             val bitmapDrawable = drawable as BitmapDrawable
                             val bitmap = bitmapDrawable.bitmap
 
-                            val drawable1 = img_door1_back.drawable
+                            val drawable1 = img_door0_back.drawable
                             val bitmapDrawable1 = drawable1 as BitmapDrawable
                             val bitmap1 = bitmapDrawable1.bitmap
 
-                            val drawable2 = img_door2_back.drawable
+                            val drawable2 = img_door1_back.drawable
                             val bitmapDrawable2 = drawable2 as BitmapDrawable
                             val bitmap2 = bitmapDrawable2.bitmap
 
-                            val drawable3 = img_door3_back.drawable
+                            val drawable3 = img_door2_back.drawable
                             val bitmapDrawable3 = drawable3 as BitmapDrawable
                             val bitmap3 = bitmapDrawable3.bitmap
 
 
                             when (View.VISIBLE) {
-                                Selection0.visibility -> {
+                                iv_selection0.visibility -> {
                                     finalSelect = 0
                                 }
-                                Selection1.visibility -> {
+                                iv_selection1.visibility -> {
 
                                     finalSelect = 1
                                 }
-                                Selection2.visibility -> {
+                                iv_selection2.visibility -> {
 
                                     finalSelect = 2
 
@@ -291,7 +297,7 @@ class MainActivity : AppCompatActivity() {
 
                             }
                             Log.e("파이널", "$finalSelect 입니다  ")
-                            if (Selection0.visibility == View.VISIBLE && bitmap == bitmap1) {
+                            if (iv_selection0.visibility == View.VISIBLE && bitmap == bitmap1) {
                                 cont++
                                 if (Select != finalSelect ) {
 
@@ -299,7 +305,7 @@ class MainActivity : AppCompatActivity() {
                                     sum++
                                 }
                                 Log.e("sum", "$sum 개")
-                            } else if (Selection1.visibility == View.VISIBLE && bitmap == bitmap2) {
+                            } else if (iv_selection1.visibility == View.VISIBLE && bitmap == bitmap2) {
                                 cont++
                                 if (Select != finalSelect) {
 
@@ -308,7 +314,7 @@ class MainActivity : AppCompatActivity() {
                                     Log.e("파이널", "$Select 과 $finalSelect  입니다 2")
                                 }
                                 Log.e("sum", "$sum 개")
-                            } else if (Selection2.visibility == View.VISIBLE && bitmap == bitmap3) {
+                            } else if (iv_selection2.visibility == View.VISIBLE && bitmap == bitmap3) {
                                 cont++
                                 if (Select != finalSelect) {
                                     sum++
@@ -324,9 +330,9 @@ class MainActivity : AppCompatActivity() {
 
 
                 R.id.btn_restart -> {
-                    LastQuestion.visibility = View.INVISIBLE
-                    firstQuestion.visibility = View.VISIBLE
-                    rnds()
+                    tv_main_question2.visibility = View.INVISIBLE
+                    tv_main_question0.visibility = View.VISIBLE
+                    Start()
                 }
 
                 R.id.btn_view_results -> {
