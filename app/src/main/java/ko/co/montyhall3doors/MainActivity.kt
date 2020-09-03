@@ -126,10 +126,6 @@ class MainActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-
-    //   버튼 이벤트 -  > 바꿧는지 바꾸지 않았는지  확인 하기
-    // 바꿧다면 바꿧을 때의 확률만 계산하기
-
     inner class BtnEvent : View.OnClickListener {
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         @SuppressLint("ResourceType")
@@ -153,8 +149,7 @@ class MainActivity : AppCompatActivity() {
                             when {
                                 Selection0.visibility.equals(View.VISIBLE) -> {
                                     when {
-                                        rnds_start.equals(0) -> {  // 0번에 차가 있을 경우
-
+                                        rnds_start.equals(0) -> {
                                             val Second_rnds = intArrayOf(1, 2).random()
                                             when (Second_rnds) {
                                                 1 -> {
@@ -243,17 +238,17 @@ class MainActivity : AppCompatActivity() {
                             Log.e("파이널", "$Select 1입니다")
                         } else if (SecondQuestion.visibility == View.VISIBLE) {
 
-                            // 숫자가 바꼇는지 확인하고 바꼇으면 sum ++ 를 해준다 .
+
 
 
                             firstQuestion.visibility = View.GONE
                             SecondQuestion.visibility = View.GONE
-                            LastQuestion.visibility = View.VISIBLE  // 마지막 지문이 보인다.
+                            LastQuestion.visibility = View.VISIBLE
                             btn_next.visibility = View.INVISIBLE
                             btn_restart.visibility = View.VISIBLE
                             btn_view_results.visibility = View.VISIBLE
 
-                            door0.visibility = View.INVISIBLE  // 문 3개가 모두 열린다
+                            door0.visibility = View.INVISIBLE
                             door1.visibility = View.INVISIBLE
                             door2.visibility = View.INVISIBLE
 
