@@ -2,20 +2,18 @@ package ko.co.montyhall3doors
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     var MainNoNModifind: Long = 0
     var MainModifind: Long = 0
@@ -32,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnMainEvent = BtnEvent();
-        btn_next.setOnClickListener(btnMainEvent);
+        btn_next.setOnClickListener(this);
         btn_restart.setOnClickListener(btnMainEvent);
         btn_view_results.setOnClickListener(btnMainEvent)
         initializeView()
@@ -140,225 +137,214 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    inner class BtnEvent : View.OnClickListener {
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        @SuppressLint("ResourceType")
-        override fun onClick(v: View?) {
-            when (v?.id) {
-                R.id.btn_next ->
-                    if (iv_selection0.visibility == View.GONE && iv_selection1.visibility == View.GONE && iv_selection2.visibility == View.GONE) {
+    override fun onClick(v: View?) {
+        btn_next.setOnClickListener {
+            if (iv_selection0.visibility == View.GONE && iv_selection1.visibility == View.GONE && iv_selection2.visibility == View.GONE) {
 
-                        val tot =
-                            Toast.makeText(this@MainActivity, "1개의 문을 선택해 주세요", Toast.LENGTH_SHORT)
-                        tot.show()
+                val tot =
+                    Toast.makeText(this@MainActivity, "1개의 문을 선택해 주세요", Toast.LENGTH_SHORT)
+                tot.show()
 
-                    } else {
+            } else {
 
-                        if (tv_main_question0.visibility == View.VISIBLE) {
-                            tv_main_question0.visibility = View.GONE
-                            tv_main_question1.visibility = View.VISIBLE
-                            tv_main_question2.visibility = View.GONE
+                if (tv_main_question0.visibility == View.VISIBLE) {
+                    tv_main_question0.visibility = View.GONE
+                    tv_main_question1.visibility = View.VISIBLE
+                    tv_main_question2.visibility = View.GONE
 
-
+                    when {
+                        iv_selection0.visibility.equals(View.VISIBLE) -> {
                             when {
-                                iv_selection0.visibility.equals(View.VISIBLE) -> {
-                                    when {
-                                        MainRandomStart.equals(0) -> {
+                                MainRandomStart.equals(0) -> {
 
-                                            val Second_rnds = intArrayOf(1, 2).random()
-                                            when (Second_rnds) {
-                                                1 -> {
-                                                    img_door1.visibility = View.INVISIBLE
-                                                }
-                                                2 -> {
-                                                    img_door2.visibility = View.INVISIBLE
-                                                }
-                                            }
-                                        }
-                                        MainRandomStart.equals(1) -> {
-                                            img_door2.visibility = View.INVISIBLE
-                                        }
-                                        MainRandomStart.equals(2) -> {
-                                            img_door1.visibility = View.INVISIBLE
-
-                                        }
-                                    }
-
-                                }
-
-
-                                iv_selection1.visibility.equals(View.VISIBLE) -> {
-                                    when {
-                                        MainRandomStart.equals(1) -> {
-
-                                            val Second_rnds = intArrayOf(0, 2).random()
-                                            when (Second_rnds) {
-                                                0 -> {
-                                                    img_door0.visibility = View.INVISIBLE
-                                                }
-                                                2 -> {
-                                                    img_door2.visibility = View.INVISIBLE
-                                                }
-                                            }
-                                        }
-                                        MainRandomStart.equals(0) -> {
-                                            img_door2.visibility = View.INVISIBLE
-                                        }
-                                        MainRandomStart.equals(2) -> {
-                                            img_door0.visibility = View.INVISIBLE
-
-                                        }
-                                    }
-
-                                }
-                                iv_selection2.visibility.equals(View.VISIBLE) -> {
-                                    when {
-                                        MainRandomStart.equals(2) -> {
-
-                                            val Second_rnds = intArrayOf(0, 1).random()
-                                            when (Second_rnds) {
-                                                0 -> {
-                                                    img_door0.visibility = View.INVISIBLE
-                                                }
-                                                1 -> {
-                                                    img_door1.visibility = View.INVISIBLE
-                                                }
-                                            }
-                                        }
-                                        MainRandomStart.equals(0) -> {
+                                    val Second_rnds = intArrayOf(1, 2).random()
+                                    when (Second_rnds) {
+                                        1 -> {
                                             img_door1.visibility = View.INVISIBLE
                                         }
-                                        MainRandomStart.equals(1) -> {
-                                            img_door0.visibility = View.INVISIBLE
+                                        2 -> {
+                                            img_door2.visibility = View.INVISIBLE
                                         }
                                     }
+                                }
+                                MainRandomStart.equals(1) -> {
+                                    img_door2.visibility = View.INVISIBLE
+                                }
+                                MainRandomStart.equals(2) -> {
+                                    img_door1.visibility = View.INVISIBLE
 
                                 }
                             }
+                        }
 
-                            when (View.VISIBLE) {
-                                iv_selection0.visibility -> {
-                                    MainSelect = 0
+                        iv_selection1.visibility.equals(View.VISIBLE) -> {
+                            when {
+                                MainRandomStart.equals(1) -> {
+
+                                    val Second_rnds = intArrayOf(0, 2).random()
+                                    when (Second_rnds) {
+                                        0 -> {
+                                            img_door0.visibility = View.INVISIBLE
+                                        }
+                                        2 -> {
+                                            img_door2.visibility = View.INVISIBLE
+                                        }
+                                    }
                                 }
-                                iv_selection1.visibility -> {
-
-                                    MainSelect = 1
+                                MainRandomStart.equals(0) -> {
+                                    img_door2.visibility = View.INVISIBLE
                                 }
-                                iv_selection2.visibility -> {
-
-                                    MainSelect = 2
+                                MainRandomStart.equals(2) -> {
+                                    img_door0.visibility = View.INVISIBLE
                                 }
-
                             }
-                            Log.e("파이널", "두번째 질문에서의 Select 는 $MainSelect 입니다")
-                        } else if (tv_main_question1.visibility == View.VISIBLE) {
+                        }
+                        iv_selection2.visibility.equals(View.VISIBLE) -> {
+                            when {
+                                MainRandomStart.equals(2) -> {
 
-
-                            tv_main_question0.visibility = View.GONE
-                            tv_main_question1.visibility = View.GONE
-                            tv_main_question2.visibility = View.VISIBLE
-                            btn_next.visibility = View.INVISIBLE
-                            btn_restart.visibility = View.VISIBLE
-                            btn_view_results.visibility = View.VISIBLE
-
-                            img_door0.visibility = View.INVISIBLE
-                            img_door1.visibility = View.INVISIBLE
-                            img_door2.visibility = View.INVISIBLE
-
-                            when (View.VISIBLE) {
-                                iv_selection0.visibility -> {
-                                    MainFinalSelect = 0
+                                    val Second_rnds = intArrayOf(0, 1).random()
+                                    when (Second_rnds) {
+                                        0 -> {
+                                            img_door0.visibility = View.INVISIBLE
+                                        }
+                                        1 -> {
+                                            img_door1.visibility = View.INVISIBLE
+                                        }
+                                    }
                                 }
-                                iv_selection1.visibility -> {
-
-                                    MainFinalSelect = 1
+                                MainRandomStart.equals(0) -> {
+                                    img_door1.visibility = View.INVISIBLE
                                 }
-                                iv_selection2.visibility -> {
-
-                                    MainFinalSelect = 2
-
+                                MainRandomStart.equals(1) -> {
+                                    img_door0.visibility = View.INVISIBLE
                                 }
-
                             }
-                            Log.e("파이널", "finalSelect 는 $MainFinalSelect 입니다  ")
-                            // 시도한 전체 횟수를 더해준다.
-                            MainCont++
-
-                            if (MainSelect != MainFinalSelect) {
-                                //선택을 바꾸었을때의 합계
-                                MainModifind++
-                                Log.e(
-                                    "확률은",
-                                    " MainModifind 은  $MainModifind 입니다."
-                                )
-                                if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0
-                                    || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
-                                    || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
-                                ) {
-                                    // 선택을 바꾸었을때 자동차 이미지인 경우
-                                    MainSum++
-                                    Log.e(
-                                        "확률은",
-                                        " MainSum 은  $MainSum 입니다."
-                                    )
-                                }
-
-                            } else if (MainSelect == MainFinalSelect) {
-                                // 선택이 바뀌지 않았을때의 합계
-                                MainNoNModifind++
-                                Log.e(
-                                    "확률은",
-                                    " MainNoNModifind 은  $MainNoNModifind 입니다."
-                                )
-                                if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0
-                                    || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
-                                    || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
-                                ) {
-                                    // 선택을 바꾸었을때 자동차 이미지인 경우
-                                    MainSum2++
-                                    Log.e(
-                                        "확률은",
-                                        " MainSum2 은  $MainSum2 입니다."
-                                    )
-
-                                }
-
-                            }
-
                         }
                     }
+                    when (View.VISIBLE) {
+                        iv_selection0.visibility -> {
+
+                            MainSelect = 0
+                        }
+                        iv_selection1.visibility -> {
+
+                            MainSelect = 1
+                        }
+                        iv_selection2.visibility -> {
+
+                            MainSelect = 2
+                        }
+                    }
+                    Log.e("파이널", "두번째 질문에서의 Select 는 $MainSelect 입니다")
+                } else if (tv_main_question1.visibility == View.VISIBLE) {
 
 
-                R.id.btn_restart -> {
-                    tv_main_question2.visibility = View.INVISIBLE
-                    tv_main_question0.visibility = View.VISIBLE
-                    initializeView()
-                }
+                    tv_main_question0.visibility = View.GONE
+                    tv_main_question1.visibility = View.GONE
+                    tv_main_question2.visibility = View.VISIBLE
+                    btn_next.visibility = View.INVISIBLE
+                    btn_restart.visibility = View.VISIBLE
+                    btn_view_results.visibility = View.VISIBLE
 
-                R.id.btn_view_results -> {
-                    //MainPercentage 선택이 바뀌었을때의 합계
-                    //MainPercentage2 선택이 바뀌지 않았을때의 확률
+                    img_door0.visibility = View.INVISIBLE
+                    img_door1.visibility = View.INVISIBLE
+                    img_door2.visibility = View.INVISIBLE
 
-                    MainPercentage = (MainSum.toDouble() / MainModifind.toDouble()) * 100
-                    MainPercentage2 = (MainSum2.toDouble() / MainNoNModifind.toDouble()) * 100
+                    when (View.VISIBLE) {
+                        iv_selection0.visibility -> {
+                            MainFinalSelect = 0
+                        }
+                        iv_selection1.visibility -> {
 
+                            MainFinalSelect = 1
+                        }
+                        iv_selection2.visibility -> {
 
-                    if (MainPercentage.isNaN()) {
-                        MainPercentage = 0.00
+                            MainFinalSelect = 2
+
+                        }
+
+                    }
+                    Log.e("파이널", "finalSelect 는 $MainFinalSelect 입니다  ")
+                    // 시도한 전체 횟수를 더해준다.
+                    MainCont++
+
+                    if (MainSelect != MainFinalSelect) {
+                        //선택을 바꾸었을때의 합계
+                        MainModifind++
+                        Log.e(
+                            "확률은",
+                            " MainModifind 은  $MainModifind 입니다."
+                        )
+                        if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0
+                            || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
+                            || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
+                        ) {
+                            // 선택을 바꾸었을때 자동차 이미지인 경우
+                            MainSum++
+                            Log.e(
+                                "확률은",
+                                " MainSum 은  $MainSum 입니다."
+                            )
+                        }
+
+                    } else if (MainSelect == MainFinalSelect) {
+                        // 선택이 바뀌지 않았을때의 합계
+                        MainNoNModifind++
+                        Log.e(
+                            "확률은",
+                            " MainNoNModifind 은  $MainNoNModifind 입니다."
+                        )
+                        if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0
+                            || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
+                            || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
+                        ) {
+                            // 선택을 바꾸었을때 자동차 이미지인 경우
+                            MainSum2++
+                            Log.e(
+                                "확률은",
+                                " MainSum2 은  $MainSum2 입니다."
+                            )
+
+                        }
+
                     }
 
-                    if (MainPercentage2.isNaN()) {
-                        MainPercentage2 = 0.00
-                    }
-
-
-                    Log.e(
-                        "확률은",
-                        " MainPercentage 은  $MainPercentage 이고 MainPercentage2 는 $MainPercentage2, MainPercentage 은 $MainPercentage, MainNoNModifind 은 $MainNoNModifind MainSum2는 $MainSum2 입니다."
-                    )
-                    MainPopup()
                 }
             }
+
+        }
+
+        btn_restart.setOnClickListener {
+            tv_main_question2.visibility = View.INVISIBLE
+            tv_main_question0.visibility = View.VISIBLE
+            initializeView()
+
+        }
+
+        btn_restart.setOnClickListener {
+            //MainPercentage 선택이 바뀌었을때의 합계
+            //MainPercentage2 선택이 바뀌지 않았을때의 확률
+
+            MainPercentage = (MainSum.toDouble() / MainModifind.toDouble()) * 100
+            MainPercentage2 = (MainSum2.toDouble() / MainNoNModifind.toDouble()) * 100
+
+
+            if (MainPercentage.isNaN()) {
+                MainPercentage = 0.00
+            }
+
+            if (MainPercentage2.isNaN()) {
+                MainPercentage2 = 0.00
+            }
+
+
+            Log.e(
+                "확률은",
+                " MainPercentage 은  $MainPercentage 이고 MainPercentage2 는 $MainPercentage2, MainPercentage 은 $MainPercentage, MainNoNModifind 은 $MainNoNModifind MainSum2는 $MainSum2 입니다."
+            )
+            MainPopup()
         }
     }
 }
