@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
 
         btn_next.setOnClickListener(this);
-        btn_restart.setOnClickListener(btnMainEvent);
-        btn_view_results.setOnClickListener(btnMainEvent)
+        btn_restart.setOnClickListener(this);
+        btn_view_results.setOnClickListener(this)
         initializeView()
         RandomNumberGenerator()
 
