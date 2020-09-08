@@ -17,10 +17,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-
+    var MainNoNModifind: Long = 0
+    var MainModifind: Long = 0
     var MainSum: Long = 0
+    var MainSum2: Long = 0
     var MainCont: Long = 0
     var MainPercentage: Double = 0.0
+    var MainPercentage2: Double = 0.0
     var MainRandomStart = 0
     var MainSelect = 0
     var MainFinalSelect = 0
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         img_door0.visibility = View.VISIBLE
         img_door1.visibility = View.VISIBLE
+        img_door2.visibility = View.VISIBLE
         btn_next.visibility = View.VISIBLE
         btn_view_results.visibility = View.GONE
         btn_restart.visibility = View.GONE
@@ -69,7 +73,6 @@ class MainActivity : AppCompatActivity() {
                 img_door1_back.setImageResource(R.drawable.goat_64)
                 img_door2_back.setImageResource(R.drawable.goat_64)
                 img_door0_back.visibility = View.VISIBLE
-
                 MainSupCar = 0
 
             }
@@ -78,7 +81,6 @@ class MainActivity : AppCompatActivity() {
                 img_door0_back.setImageResource(R.drawable.goat_64)
                 img_door2_back.setImageResource(R.drawable.goat_64)
                 img_door1_back.visibility = View.VISIBLE
-
                 MainSupCar = 1
             }
             else -> {
@@ -121,13 +123,13 @@ class MainActivity : AppCompatActivity() {
         val view = inflater.inflate(R.layout.main_popup, null)
         val TVMainPopup: TextView = view.findViewById(R.id.main_popup)
         val MainPopupPercent = String.format("%.2f", MainPercentage)
+        val MainPopupPercent2 = String.format("%.2f", MainPercentage2)
 
-        Log.e("확률은", "$MainPopupPercent 입니다.")
-
-        TVMainPopup.text = "총 $MainCont 번 시도하여 약 $MainPopupPercent 의 확률을 얻었습니다."
+        TVMainPopup.text =
+            "총 $MainCont 번의 시도중 $MainModifind 번 선택을 번복 하였으며 선택 번복시 성공 확률은 $MainPopupPercent, 번복하지 않을경우 $MainPopupPercent2 의 확률을 얻었습니다."
         val alertDialog = AlertDialog.Builder(this)
             .setTitle("결과")
-            .setPositiveButton("보기") { dialog, which ->
+            .setPositiveButton("보기") { _, _ ->
                 Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
             }
             .setNegativeButton("취소", null)
@@ -279,53 +281,50 @@ class MainActivity : AppCompatActivity() {
 
                             }
                             Log.e("파이널", "finalSelect 는 $MainFinalSelect 입니다  ")
-                            if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0) {
-                                MainCont++
-                                if (MainSelect != MainFinalSelect) {
+                            // 시도한 전체 횟수를 더해준다.
+                            MainCont++
 
-                                    Log.e("파이널", "Select 는 $MainSelect 입니다")
-                                    Log.e("파이널", "sum 는 $MainSum 입니다")
-                                    Log.e("파이널", "SupCar 는 $MainSupCar 입니다")
-                                    Log.e(
-                                        "파이널",
-                                        "Select 와 finalSelect 는 $MainSelect 와 $MainFinalSelect 입니다"
-                                    )
+                            if (MainSelect != MainFinalSelect) {
+                                //선택을 바꾸었을때의 합계
+                                MainModifind++
+                                Log.e(
+                                    "확률은",
+                                    " MainModifind 은  $MainModifind 입니다."
+                                )
+                                if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0
+                                    || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
+                                    || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
+                                ) {
+                                    // 선택을 바꾸었을때 자동차 이미지인 경우
                                     MainSum++
-                                }
-                                Log.e("sum", "$MainSum 개")
-                            } else if (iv_selection1.visibility == View.VISIBLE && MainSupCar == 1) {
-                                MainCont++
-                                if (MainSelect != MainFinalSelect) {
-
-                                    MainSum++
-
-                                    Log.e("파이널", "Select 는 $MainSelect 입니다")
-                                    Log.e("파이널", "sum 는 $MainSum 입니다")
-                                    Log.e("파이널", "SupCar 는 $MainSupCar 입니다")
                                     Log.e(
-                                        "파이널",
-                                        "Select 와 finalSelect 는 $MainSelect 와 $MainFinalSelect 입니다"
+                                        "확률은",
+                                        " MainSum 은  $MainSum 입니다."
                                     )
                                 }
-                                Log.e("sum", "$MainSum 개")
-                            } else if (iv_selection2.visibility == View.VISIBLE && MainSupCar == 2) {
-                                MainCont++
-                                if (MainSelect != MainFinalSelect) {
-                                    MainSum++
-                                    Log.e("파이널", "Select 는 $MainSelect 입니다")
-                                    Log.e("파이널", "sum 는 $MainSum 입니다")
-                                    Log.e("파이널", "SupCar 는 $MainSupCar 입니다")
+
+                            } else if (MainSelect == MainFinalSelect) {
+                                // 선택이 바뀌지 않았을때의 합계
+                                MainNoNModifind++
+                                Log.e(
+                                    "확률은",
+                                    " MainNoNModifind 은  $MainNoNModifind 입니다."
+                                )
+                                if (iv_selection0.visibility == View.VISIBLE && MainSupCar == 0
+                                    || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
+                                    || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
+                                ) {
+                                    // 선택을 바꾸었을때 자동차 이미지인 경우
+                                    MainSum2++
                                     Log.e(
-                                        "파이널",
-                                        "Select 와 finalSelect 는 $MainSelect 와 $MainFinalSelect 입니다"
+                                        "확률은",
+                                        " MainSum2 은  $MainSum2 입니다."
                                     )
+
                                 }
-                            } else {
-                                MainCont++
-                                Log.e("파이널", "모두 아닐때 sum 는 $MainSum 입니다")
 
                             }
-                            Log.e("count", "$MainCont 개")
+
                         }
                     }
 
@@ -337,12 +336,25 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.btn_view_results -> {
+                    //MainPercentage 선택이 바뀌었을때의 합계
+                    //MainPercentage2 선택이 바뀌지 않았을때의 확률
 
-                    MainPercentage = (MainSum.toDouble() / MainCont.toDouble()) * 100
+                    MainPercentage = (MainSum.toDouble() / MainModifind.toDouble()) * 100
+                    MainPercentage2 = (MainSum2.toDouble() / MainNoNModifind.toDouble()) * 100
+
+
+                    if (MainPercentage.isNaN()) {
+                        MainPercentage = 0.00
+                    }
+
+                    if (MainPercentage2.isNaN()) {
+                        MainPercentage2 = 0.00
+                    }
+
 
                     Log.e(
                         "확률은",
-                        " MainSum 은  $MainSum 이고 MainCont 는 $MainCont, MainPercentage 은 $MainPercentage 입니다."
+                        " MainPercentage 은  $MainPercentage 이고 MainPercentage2 는 $MainPercentage2, MainPercentage 은 $MainPercentage, MainNoNModifind 은 $MainNoNModifind MainSum2는 $MainSum2 입니다."
                     )
                     MainPopup()
                 }
