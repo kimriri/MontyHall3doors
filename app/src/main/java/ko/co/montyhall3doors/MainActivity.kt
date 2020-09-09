@@ -2,10 +2,12 @@ package ko.co.montyhall3doors
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -26,13 +28,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     var MainSelect = 0
     var MainFinalSelect = 0
     var MainSupCar = 0
+    var MainAutoPopNum = 0
+    var MainAutoPopNum2 = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_next.setOnClickListener(this);
-        btn_restart.setOnClickListener(this);
+        btn_next.setOnClickListener(this)
+        btn_restart.setOnClickListener(this)
         btn_view_results.setOnClickListener(this)
+        btn_main_auto_play.setOnClickListener(this)
         initializeView()
         RandomNumberGenerator()
 
@@ -54,6 +59,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun RandomNumberGenerator() {
+        val MainFirstRandom = (0..2).random()
+
+        MainRandomStart = MainFirstRandom
+        MainInputRandom()
+        MainSelectDoors()
+    }
+
+
+    private fun RandomAutoSelectionGenerator() {
         val MainFirstRandom = (0..2).random()
 
         MainRandomStart = MainFirstRandom
@@ -91,6 +105,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
+
 
     private fun MainSelectDoors() {
 
@@ -134,6 +149,51 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         alertDialog.setView(view)
         alertDialog.show()
+    }
+
+    private fun MainAutoPopupPopup() {
+
+        val builder = AlertDialog.Builder(this)
+        // builder.setIcon(R.mipmap.ic_launcher)
+
+        builder.setTitle("선택을 번복을 '번복',원하지 않는다면 '미번복' 버튼을 눌러 주세요. ")
+
+        val v1 = layoutInflater.inflate(R.layout.main_auto_play_popup, null)
+        builder.setView(v1)
+
+        // p0에 해당 AlertDialog가 들어온다. findViewById를 통해 view를 가져와서 사용
+        val listener = DialogInterface.OnClickListener { p0, p1 ->
+            val alert = p0 as AlertDialog
+            val edit1: EditText? = alert.findViewById<EditText>(R.id.editText)
+
+            tv1.text = "${edit1?.text}"
+            tv1.visibility = View.GONE
+
+
+            MainAutoPopNum = Integer.parseInt(tv1.text.toString());
+            Log.e("횟수", "선택 변경 인 경우 횟수는 $tv1 입니다.")
+
+            for (item in 1..MainAutoPopNum) {
+
+                initializeView()
+                RandomNumberGenerator()
+            }
+
+        }
+        val listener2 = DialogInterface.OnClickListener { p0, p1 ->
+            val alert = p0 as AlertDialog
+            val edit1: EditText? = alert.findViewById<EditText>(R.id.editText)
+
+            tv2.text = "${edit1?.text}"
+            tv2.visibility = View.GONE
+            Log.e("횟수", "선택 미 변경 인 경우 횟수는 $tv2 입니다.")
+            Integer.parseInt(tv2.text.toString());
+        }
+        builder.setPositiveButton("번복", listener)
+        builder.setNegativeButton("미번복 ", listener2)
+
+        builder.show()
+
     }
 
 
@@ -338,16 +398,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             if (MainPercentage2.isNaN()) {
                 MainPercentage2 = 0.00
             }
-
-
             Log.e(
                 "확률은",
                 " MainPercentage 은  $MainPercentage 이고 MainPercentage2 는 $MainPercentage2, MainPercentage 은 $MainPercentage, MainNoNModifind 은 $MainNoNModifind MainSum2는 $MainSum2 입니다."
             )
             MainPopup()
         }
+
+        btn_main_auto_play.setOnClickListener {
+            MainAutoPopupPopup()
+        }
     }
 }
+
 
 
 
