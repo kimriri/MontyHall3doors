@@ -7,5 +7,7 @@
     <string name="btn_main_restart">다시하기</string>
     <string name="btn_main_view_results">결과보기</string>
     <string name="btn_main_auto_play">자동실행</string>
+    <string name="tv_main_auto_play_hint">자동 실행할 홧숫를 입력해 주세요.</string>
+    <string name="tv_main_auto_play">두번째 질문에서 선택 번복을 원한다면 \'번복\' 아니라면 \'미번복\' 버튼을 눌러주세요.</string>
 
 </resources>

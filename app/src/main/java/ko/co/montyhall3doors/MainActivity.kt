@@ -13,9 +13,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.main_auto_play_popup.*
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
 
     var MainNoNModifind: Long = 0
     var MainModifind: Long = 0
@@ -25,179 +26,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     var MainPercentage: Double = 0.0
     var MainPercentage2: Double = 0.0
     var MainRandomStart = 0
+    var MainAutoRandomStart0 = 0
+    var MainAutoRandomStart1 = 0
     var MainSelect = 0
     var MainFinalSelect = 0
     var MainSupCar = 0
-    var MainAutoPopNum = 0
+    var MainAutoPopCount = 0
     var MainAutoPopNum2 = 0
+    var MainAutoSum = 0
+    var MainAutoPercentage: Double = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        btn_next.setOnClickListener(this)
-        btn_restart.setOnClickListener(this)
-        btn_view_results.setOnClickListener(this)
-        btn_main_auto_play.setOnClickListener(this)
         initializeView()
         RandomNumberGenerator()
-
+        ButtonEventView()
     }
 
-
-    private fun initializeView() {
-
-        img_door0.visibility = View.VISIBLE
-        img_door1.visibility = View.VISIBLE
-        img_door2.visibility = View.VISIBLE
-        btn_next.visibility = View.VISIBLE
-        btn_view_results.visibility = View.GONE
-        btn_restart.visibility = View.GONE
-        iv_selection0.visibility = View.GONE
-        iv_selection1.visibility = View.GONE
-        iv_selection2.visibility = View.GONE
-        RandomNumberGenerator()
-    }
-
-    private fun RandomNumberGenerator() {
-        val MainFirstRandom = (0..2).random()
-
-        MainRandomStart = MainFirstRandom
-        MainInputRandom()
-        MainSelectDoors()
-    }
-
-
-    private fun RandomAutoSelectionGenerator() {
-        val MainFirstRandom = (0..2).random()
-
-        MainRandomStart = MainFirstRandom
-        MainInputRandom()
-        MainSelectDoors()
-    }
-
-    private fun MainInputRandom() {
-
-        when (MainRandomStart) {
-
-            0 -> {
-                img_door0_back.setImageResource(R.drawable.supercar_64)
-                img_door1_back.setImageResource(R.drawable.goat_64)
-                img_door2_back.setImageResource(R.drawable.goat_64)
-                img_door0_back.visibility = View.VISIBLE
-                MainSupCar = 0
-
-            }
-            1 -> {
-                img_door1_back.setImageResource(R.drawable.supercar_64)
-                img_door0_back.setImageResource(R.drawable.goat_64)
-                img_door2_back.setImageResource(R.drawable.goat_64)
-                img_door1_back.visibility = View.VISIBLE
-                MainSupCar = 1
-            }
-            else -> {
-                img_door2_back.setImageResource(R.drawable.supercar_64)
-                img_door1_back.setImageResource(R.drawable.goat_64)
-                img_door0_back.setImageResource(R.drawable.goat_64)
-                img_door2_back.visibility = View.VISIBLE
-                MainSupCar = 2
-
-            }
-
-        }
-    }
-
-
-    private fun MainSelectDoors() {
-
-        img_door0.setOnClickListener {
-            iv_selection0.visibility = View.VISIBLE
-            iv_selection1.visibility = View.GONE
-            iv_selection2.visibility = View.GONE
-        }
-
-        img_door1.setOnClickListener {
-            iv_selection0.visibility = View.GONE
-            iv_selection1.visibility = View.VISIBLE
-            iv_selection2.visibility = View.GONE
-        }
-        img_door2.setOnClickListener {
-            iv_selection0.visibility = View.GONE
-            iv_selection1.visibility = View.GONE
-            iv_selection2.visibility = View.VISIBLE
-        }
-    }
-
-
-    @SuppressLint("ShowToast", "SetTextI18n")
-    private fun MainPopup() {
-
-        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.main_popup, null)
-        val TVMainPopup: TextView = view.findViewById(R.id.main_popup)
-        val MainPopupPercent = String.format("%.2f", MainPercentage)
-        val MainPopupPercent2 = String.format("%.2f", MainPercentage2)
-
-        TVMainPopup.text =
-            "총 $MainCont 번의 시도중 $MainModifind 번 선택을 번복 하였으며 선택 번복시 성공 확률은 $MainPopupPercent, 번복하지 않을경우 $MainPopupPercent2 의 확률을 얻었습니다."
-        val alertDialog = AlertDialog.Builder(this)
-            .setTitle("결과")
-            .setPositiveButton("보기") { _, _ ->
-                Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
-            }
-            .setNegativeButton("취소", null)
-            .create()
-
-        alertDialog.setView(view)
-        alertDialog.show()
-    }
-
-    private fun MainAutoPopupPopup() {
-
-        val builder = AlertDialog.Builder(this)
-        // builder.setIcon(R.mipmap.ic_launcher)
-
-        builder.setTitle("선택을 번복을 '번복',원하지 않는다면 '미번복' 버튼을 눌러 주세요. ")
-
-        val v1 = layoutInflater.inflate(R.layout.main_auto_play_popup, null)
-        builder.setView(v1)
-
-        // p0에 해당 AlertDialog가 들어온다. findViewById를 통해 view를 가져와서 사용
-        val listener = DialogInterface.OnClickListener { p0, p1 ->
-            val alert = p0 as AlertDialog
-            val edit1: EditText? = alert.findViewById<EditText>(R.id.editText)
-
-            tv1.text = "${edit1?.text}"
-            tv1.visibility = View.GONE
-
-
-            MainAutoPopNum = Integer.parseInt(tv1.text.toString());
-            Log.e("횟수", "선택 변경 인 경우 횟수는 $tv1 입니다.")
-
-            for (item in 1..MainAutoPopNum) {
-
-                initializeView()
-                RandomNumberGenerator()
-            }
-
-        }
-        val listener2 = DialogInterface.OnClickListener { p0, p1 ->
-            val alert = p0 as AlertDialog
-            val edit1: EditText? = alert.findViewById<EditText>(R.id.editText)
-
-            tv2.text = "${edit1?.text}"
-            tv2.visibility = View.GONE
-            Log.e("횟수", "선택 미 변경 인 경우 횟수는 $tv2 입니다.")
-            Integer.parseInt(tv2.text.toString());
-        }
-        builder.setPositiveButton("번복", listener)
-        builder.setNegativeButton("미번복 ", listener2)
-
-        builder.show()
-
-    }
-
-
-    override fun onClick(v: View?) {
+    private fun ButtonEventView() {
         btn_next.setOnClickListener {
             if (iv_selection0.visibility == View.GONE && iv_selection1.visibility == View.GONE && iv_selection2.visibility == View.GONE) {
 
@@ -366,24 +212,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                                 "확률은",
                                 " MainSum2 은  $MainSum2 입니다."
                             )
-
                         }
-
                     }
-
                 }
             }
-
         }
-
         btn_restart.setOnClickListener {
             tv_main_question2.visibility = View.INVISIBLE
             tv_main_question0.visibility = View.VISIBLE
             initializeView()
 
         }
-
-        btn_restart.setOnClickListener {
+        btn_view_results.setOnClickListener {
             //MainPercentage 선택이 바뀌었을때의 합계
             //MainPercentage2 선택이 바뀌지 않았을때의 확률
 
@@ -404,15 +244,214 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             )
             MainPopup()
         }
-
         btn_main_auto_play.setOnClickListener {
-            MainAutoPopupPopup()
+            MainAutoPopup0()
+
         }
     }
+
+
+    private fun initializeView() {
+
+        img_door0.visibility = View.VISIBLE
+        img_door1.visibility = View.VISIBLE
+        img_door2.visibility = View.VISIBLE
+        btn_next.visibility = View.VISIBLE
+        btn_view_results.visibility = View.GONE
+        btn_restart.visibility = View.GONE
+        iv_selection0.visibility = View.GONE
+        iv_selection1.visibility = View.GONE
+        iv_selection2.visibility = View.GONE
+        RandomNumberGenerator()
+    }
+
+    private fun RandomNumberGenerator() {
+        val MainFirstRandom = (0..2).random()
+        MainRandomStart = MainFirstRandom
+        MainInputRandom()
+        MainSelectDoors()
+    }
+
+    private fun RandomAutoNumberGenerator() {
+
+        for (item in 1..MainAutoPopCount) {
+            val MainAutoRandom1 = (0..2).random()
+            val MainAutoRandom2 = (0..2).random()
+            MainAutoRandomStart0 = MainAutoRandom1
+            MainAutoRandomStart1 = MainAutoRandom2
+
+            when (MainAutoRandomStart0 != MainAutoRandomStart1) {
+                true -> MainAutoSum++
+            }
+
+        }
+    }
+
+    private fun MainInputRandom() {  //  문뒤에 랜덤 이미지 삽입
+
+        when (MainRandomStart) {
+
+            0 -> {
+                img_door0_back.setImageResource(R.drawable.supercar_64)
+                img_door1_back.setImageResource(R.drawable.goat_64)
+                img_door2_back.setImageResource(R.drawable.goat_64)
+                img_door0_back.visibility = View.VISIBLE
+                MainSupCar = 0
+
+            }
+            1 -> {
+                img_door1_back.setImageResource(R.drawable.supercar_64)
+                img_door0_back.setImageResource(R.drawable.goat_64)
+                img_door2_back.setImageResource(R.drawable.goat_64)
+                img_door1_back.visibility = View.VISIBLE
+                MainSupCar = 1
+            }
+            else -> {
+                img_door2_back.setImageResource(R.drawable.supercar_64)
+                img_door1_back.setImageResource(R.drawable.goat_64)
+                img_door0_back.setImageResource(R.drawable.goat_64)
+                img_door2_back.visibility = View.VISIBLE
+                MainSupCar = 2
+
+            }
+
+        }
+    }
+
+
+    private fun MainSelectDoors() {  // 선택 버튼을 보여주는 람수
+
+        img_door0.setOnClickListener {
+            iv_selection0.visibility = View.VISIBLE
+            iv_selection1.visibility = View.GONE
+            iv_selection2.visibility = View.GONE
+        }
+
+        img_door1.setOnClickListener {
+            iv_selection0.visibility = View.GONE
+            iv_selection1.visibility = View.VISIBLE
+            iv_selection2.visibility = View.GONE
+        }
+        img_door2.setOnClickListener {
+            iv_selection0.visibility = View.GONE
+            iv_selection1.visibility = View.GONE
+            iv_selection2.visibility = View.VISIBLE
+        }
+    }
+
+
+    @SuppressLint("ShowToast", "SetTextI18n")
+    private fun MainPopup() {
+
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.main_popup, null)
+        val TVMainPopup: TextView = view.findViewById(R.id.tv_main_popup)
+        val MainPopupPercent = String.format("%.2f", MainPercentage)
+        val MainPopupPercent2 = String.format("%.2f", MainPercentage2)
+
+        TVMainPopup.text =
+            "총 $MainCont 번의 시도중 $MainModifind 번 선택을 번복 하였으며 선택 번복시 성공 확률은 $MainPopupPercent, 번복하지 않을경우 $MainPopupPercent2 의 확률을 얻었습니다."
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("결과")
+            .setPositiveButton("보기") { _, _ ->
+                Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
+            }
+            .setNegativeButton("취소", null)
+            .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
+
+    private fun MainAutoPopup1() {
+
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.main_popup, null)
+        val TVMainPopup: TextView = view.findViewById(R.id.tv_main_popup)
+        val MainPopupPercent = String.format("%.2f", MainAutoPercentage)
+
+        TVMainPopup.text =
+            "총 $MainAutoPopCount 번의 시도중 $MainAutoSum 번 성공 하여 $MainPopupPercent 의 확률을 얻었습니다. "
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("결과")
+            .setPositiveButton("보기") { _, _ ->
+                Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
+            }
+            .setNegativeButton("취소", null)
+            .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
+
+    private fun MainAutoPopup0() {
+
+        val builder = AlertDialog.Builder(this)
+        // builder.setIcon(R.mipmap.ic_launcher)
+
+        builder.setTitle("자동 실행")
+        builder.setView(tv_main_auto_popup_auto)
+        val v1 = layoutInflater.inflate(R.layout.main_auto_play_popup, null)
+        builder.setView(v1)
+
+        // p0에 해당 AlertDialog가 들어온다. findViewById를 통해 view를 가져와서 사용
+        val listener = DialogInterface.OnClickListener { p0, p1 ->
+            val alert = p0 as AlertDialog
+            val textView: TextView? = alert.findViewById<TextView>(R.id.tv_main_auto_popup_auto)
+            val edit1: EditText? = alert.findViewById<EditText>(R.id.tv_main_auto_popup_number)
+            tv1.text = "${edit1?.text}"
+            tv1.visibility = View.GONE
+            if (tv1.text == "") {
+                Log.e("횟수", "선택 변경 인 경우 횟수는 $tv1 입니다.  $edit1?.text")
+                val toast =
+                    Toast.makeText(this@MainActivity, "자동실행할 횟수를 입력해 주세요.", Toast.LENGTH_SHORT)
+                toast.show()
+                MainAutoPopup0()
+            } else {
+                MainAutoPopCount = Integer.parseInt(tv1.text.toString())
+                Log.e("횟수", "선택 변경 인 경우 횟수는 $MainAutoPopCount 입니다.")
+
+                initializeView()  // 뷰 초기화
+                RandomAutoNumberGenerator()  // 램덤 반복 으로 실행 하기
+                MainAutoPercentage = (MainAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
+                Log.e("확인인", "램덤 선택버튼은 $MainAutoPercentage 입니다. 총 시도 횟수는 $MainAutoPopCount  입니다. MainAutoPopCount는 $MainAutoPopCount MainAutoSum은 $MainAutoSum 입니다.")
+                MainAutoPopup1()
+            }
+        }
+            val listener1 = DialogInterface.OnClickListener { p0, p1 ->
+            val alert = p0 as AlertDialog
+            val edit1: EditText? = alert.findViewById<EditText>(R.id.tv_main_auto_popup_number)
+
+            tv2.text = "${edit1?.text}"
+            tv2.visibility = View.GONE
+            MainAutoPopNum2 = Integer.parseInt(tv2.toString())
+            Log.e("횟수", "선택 미 변경 인 경우 횟수는 $MainAutoPopNum2 입니다.")
+        }
+
+
+        when (tv1.text) {
+            null -> {
+                builder.setPositiveButton("미번복", null)
+            }
+            else ->
+                builder.setPositiveButton("미번복", listener1)
+        }
+        when (tv2.text) {
+            null -> {
+                builder.setPositiveButton("번복", null)
+            }
+            else ->
+                builder.setNegativeButton("번복 ", listener)
+        }
+        builder.setNeutralButton(
+            "돌아가기"
+        ) { _, _ ->
+        }
+        builder.show()
+
+
+    }
+
+
 }
-
-
-
-
-
 
