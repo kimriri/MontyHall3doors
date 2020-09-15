@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun RandomAutoNumberGenerator() {
-
+        MainAutoSum = 0
         for (item in 1..MainAutoPopCount) {
             val MainAutoRandom1 = (0..2).random()
             val MainAutoRandom2 = (0..2).random()
@@ -377,6 +377,7 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("보기") { _, _ ->
                 Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
             }
+
             .setNegativeButton("취소", null)
             .create()
 
@@ -414,11 +415,14 @@ class MainActivity : AppCompatActivity() {
                 initializeView()  // 뷰 초기화
                 RandomAutoNumberGenerator()  // 램덤 반복 으로 실행 하기
                 MainAutoPercentage = (MainAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
-                Log.e("확인인", "램덤 선택버튼은 $MainAutoPercentage 입니다. 총 시도 횟수는 $MainAutoPopCount  입니다. MainAutoPopCount는 $MainAutoPopCount MainAutoSum은 $MainAutoSum 입니다.")
+                Log.e(
+                    "확인인",
+                    "램덤 선택버튼은 $MainAutoPercentage 입니다. 총 시도 횟수는 $MainAutoPopCount  입니다. MainAutoPopCount는 $MainAutoPopCount MainAutoSum은 $MainAutoSum 입니다."
+                )
                 MainAutoPopup1()
             }
         }
-            val listener1 = DialogInterface.OnClickListener { p0, p1 ->
+        val listener1 = DialogInterface.OnClickListener { p0, p1 ->
             val alert = p0 as AlertDialog
             val edit1: EditText? = alert.findViewById<EditText>(R.id.tv_main_auto_popup_number)
 
