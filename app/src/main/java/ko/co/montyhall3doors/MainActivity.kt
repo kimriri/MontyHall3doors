@@ -1,8 +1,8 @@
 package ko.co.montyhall3doors
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,11 +12,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_auto_play.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_auto_play_popup.*
+import java.util.ArrayList
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     var MainNoNModifind: Long = 0
     var MainModifind: Long = 0
@@ -34,10 +35,16 @@ class MainActivity : AppCompatActivity() {
     var MainAutoPopCount = 0
     var MainAutoPopNum2 = 0
     var MainAutoSum = 0
+    var MainAutoSum1 = 0
     var MainAutoPercentage: Double = 0.0
+    var MainAutoPercentage1: Double = 0.0
+    var MainAutoPercentage2: Double = 0.
+    val autodataList = ArrayList<AutoData>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         initializeView()
         RandomNumberGenerator()
         ButtonEventView()
@@ -162,11 +169,9 @@ class MainActivity : AppCompatActivity() {
                             MainFinalSelect = 0
                         }
                         iv_selection1.visibility -> {
-
                             MainFinalSelect = 1
                         }
                         iv_selection2.visibility -> {
-
                             MainFinalSelect = 2
 
                         }
@@ -273,6 +278,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun RandomAutoNumberGenerator() {
+        autodataList.clear()
         MainAutoSum = 0
         for (item in 1..MainAutoPopCount) {
             val MainAutoRandom1 = (0..2).random()
@@ -282,10 +288,55 @@ class MainActivity : AppCompatActivity() {
 
             when (MainAutoRandomStart0 != MainAutoRandomStart1) {
                 true -> MainAutoSum++
-            }
 
+                false -> MainAutoSum1 ++
+            }
+            MainAutoPercentage1 = (MainAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
+            MainAutoPercentage2 = (MainAutoSum.toDouble() / item.toDouble()) * 100
+
+
+            val strAutoPopCount: String = item.toString()  // 전체
+            val strAutoSum: String = MainAutoSum.toString()  // 성공 횟수
+            val strAutoPercentage1: String = MainAutoPercentage1.toString()  //  누적 확률
+            val strAutoPercentage2 = String.format("%.2f", MainAutoPercentage2) // //  개별 확률
+            val nextIntent = Intent(this, ListActivity::class.java)
+            nextIntent.putExtra("AutoPopCount", item)
+            nextIntent.putExtra("AutoSum", strAutoSum)
+            nextIntent.putExtra("strAutoPercentage2", strAutoPercentage2)
+            val autodataList1 = AutoData(strAutoPopCount , strAutoSum,  "$strAutoPercentage2%")
+            autodataList.add(autodataList1)
         }
     }
+
+    private fun RandomAutoNumberGenerator1() {
+        autodataList.clear()
+        MainAutoSum1 =0
+        for (item in 1..MainAutoPopCount) {
+            val MainAutoRandom1 = (0..2).random()
+            val MainAutoRandom2 = (0..2).random()
+            MainAutoRandomStart0 = MainAutoRandom1
+            MainAutoRandomStart1 = MainAutoRandom2
+
+            when (MainAutoRandomStart0 == MainAutoRandomStart1) {
+                true -> MainAutoSum1++
+            }
+            MainAutoPercentage1 = (MainAutoSum1.toDouble() / MainAutoPopCount.toDouble()) * 100
+            MainAutoPercentage2 = (MainAutoSum1.toDouble() / item.toDouble()) * 100
+
+
+            val strAutoPopCount: String = item.toString()  // 전체
+            val strAutoSum2: String = MainAutoSum1.toString()  // 성공 횟수
+            val strAutoPercentage1: String = MainAutoPercentage1.toString()  //  누적 확률
+            val strAutoPercentage2 = String.format("%.2f", MainAutoPercentage2) // //  개별 확률
+            val nextIntent = Intent(this, ListActivity::class.java)
+            nextIntent.putExtra("AutoPopCount", item)
+            nextIntent.putExtra("AutoSum", strAutoSum2)
+            nextIntent.putExtra("strAutoPercentage2", strAutoPercentage2)
+            val autodataList1 = AutoData(strAutoPopCount , strAutoSum2,  "$strAutoPercentage2%")
+            autodataList.add(autodataList1)
+        }
+    }
+
 
     private fun MainInputRandom() {  //  문뒤에 랜덤 이미지 삽입
 
@@ -340,7 +391,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @SuppressLint("ShowToast", "SetTextI18n")
     private fun MainPopup() {
 
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -353,8 +403,10 @@ class MainActivity : AppCompatActivity() {
             "총 $MainCont 번의 시도중 $MainModifind 번 선택을 번복 하였으며 선택 번복시 성공 확률은 $MainPopupPercent, 번복하지 않을경우 $MainPopupPercent2 의 확률을 얻었습니다."
         val alertDialog = AlertDialog.Builder(this)
             .setTitle("결과")
-            .setPositiveButton("보기") { _, _ ->
+            .setPositiveButton("보기 ") { _, _ ->
                 Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
+
+
             }
             .setNegativeButton("취소", null)
             .create()
@@ -364,20 +416,56 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun MainAutoPopup1() {
-
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.main_popup, null)
         val TVMainPopup: TextView = view.findViewById(R.id.tv_main_popup)
         val MainPopupPercent = String.format("%.2f", MainAutoPercentage)
 
+        val listener3 = DialogInterface.OnClickListener { p0, p1 ->
+            val alert = p0 as AlertDialog
+
+            MainAutoPopNum2 = Integer.parseInt(tv2.toString())
+            Log.e("횟수", "선택 미 변경 인 경우 횟수는 $MainAutoPopNum2 입니다.")
+        }
         TVMainPopup.text =
             "총 $MainAutoPopCount 번의 시도중 $MainAutoSum 번 성공 하여 $MainPopupPercent 의 확률을 얻었습니다. "
         val alertDialog = AlertDialog.Builder(this)
             .setTitle("결과")
-            .setPositiveButton("보기") { _, _ ->
+            .setPositiveButton("개별 확률 보기") { _, _ ->
                 Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
+                val AutoPlayIntent = Intent(this, ListActivity::class.java)
+                AutoPlayIntent.putParcelableArrayListExtra("AutoDataList", autodataList)
+                startActivity(AutoPlayIntent)
             }
+            .setNegativeButton("취소", null)
+            .create()
 
+        alertDialog.setView(view)
+        alertDialog.show()
+    }
+
+    private fun MainAutoPopup2() {
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.main_popup, null)
+        val TVMainPopup: TextView = view.findViewById(R.id.tv_main_popup)
+        val MainPopupPercent = String.format("%.2f", MainAutoPercentage)
+
+        val listener3 = DialogInterface.OnClickListener { p0, p1 ->
+            val alert = p0 as AlertDialog
+
+            MainAutoPopNum2 = Integer.parseInt(tv2.toString())
+            Log.e("횟수", "선택 미 변경 인 경우 횟수는 $MainAutoPopNum2 입니다.")
+        }
+        TVMainPopup.text =
+            "총 $MainAutoPopCount 번의 시도중 $MainAutoSum1 번 성공 하여 $MainPopupPercent 의 확률을 얻었습니다. "
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("결과")
+            .setPositiveButton("개별 확률 보기") { _, _ ->
+                Toast.makeText(applicationContext, "결과 보여주기", Toast.LENGTH_SHORT)
+                val AutoPlayIntent = Intent(this, ListActivity::class.java)
+                AutoPlayIntent.putParcelableArrayListExtra("AutoDataList", autodataList)
+                startActivity(AutoPlayIntent)
+            }
             .setNegativeButton("취소", null)
             .create()
 
@@ -424,12 +512,29 @@ class MainActivity : AppCompatActivity() {
         }
         val listener1 = DialogInterface.OnClickListener { p0, p1 ->
             val alert = p0 as AlertDialog
+            val textView: TextView? = alert.findViewById<TextView>(R.id.tv_main_auto_popup_auto)
             val edit1: EditText? = alert.findViewById<EditText>(R.id.tv_main_auto_popup_number)
+            tv1.text = "${edit1?.text}"
+            tv1.visibility = View.GONE
+            if (tv1.text == "") {
+                Log.e("횟수", "선택 변경 인 경우 횟수는 $tv1 입니다.  $edit1?.text")
+                val toast =
+                    Toast.makeText(this@MainActivity, "자동실행할 횟수를 입력해 주세요.", Toast.LENGTH_SHORT)
+                toast.show()
+                MainAutoPopup0()
+            } else {
+                MainAutoPopCount = Integer.parseInt(tv1.text.toString())
+                Log.e("횟수", "선택  미변경 인 경우 횟수는 $MainAutoPopCount 입니다.")
 
-            tv2.text = "${edit1?.text}"
-            tv2.visibility = View.GONE
-            MainAutoPopNum2 = Integer.parseInt(tv2.toString())
-            Log.e("횟수", "선택 미 변경 인 경우 횟수는 $MainAutoPopNum2 입니다.")
+                initializeView()  // 뷰 초기화
+                RandomAutoNumberGenerator1()  // 램덤 반복 으로 실행 하기
+                MainAutoPercentage = (MainAutoSum1.toDouble() / MainAutoPopCount.toDouble()) * 100
+                Log.e(
+                    "확인인",
+                    "램덤 선택버튼은 $MainAutoPercentage 입니다. 총 시도 횟수는 $MainAutoPopCount  입니다. MainAutoPopCount는 $MainAutoPopCount MainAutoSum은 $MainAutoSum1 입니다."
+                )
+                MainAutoPopup2()
+            }
         }
 
 
