@@ -52,18 +52,18 @@ class MainActivity : AppCompatActivity(){
         RandomNumberGenerator()
         ButtonEventView()
 
-        val crashButton = Button(this)
-        crashButton.setText("Crash!")
-        crashButton.setOnClickListener(View.OnClickListener {
-            Crashlytics.getInstance().crash() // Force a crash
-        })
-        addContentView(
-            crashButton,
-            ActionBar.LayoutParams(
-                ActionBar.LayoutParams.MATCH_PARENT,
-                ActionBar.LayoutParams.WRAP_CONTENT
-            )
-        )
+//        val crashButton = Button(this)
+//        crashButton.setText("Crash!")
+//        crashButton.setOnClickListener(View.OnClickListener {
+//            Crashlytics.getInstance().crash() // Force a crash
+//        })
+//        addContentView(
+//            crashButton,
+//            ActionBar.LayoutParams(
+//                ActionBar.LayoutParams.MATCH_PARENT,
+//                ActionBar.LayoutParams.WRAP_CONTENT
+//            )
+//        )
     }
 
     private fun ButtonEventView() {
