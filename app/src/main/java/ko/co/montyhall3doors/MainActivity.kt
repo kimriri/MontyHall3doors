@@ -3,10 +3,12 @@ package ko.co.montyhall3doors
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -208,6 +210,14 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             // 선택을 바꾸었을때 자동차 이미지인 경우
                             MainChangeSum++
+                            main_success_anim.visibility = View.INVISIBLE
+                          val annotation=AnimationUtils.loadAnimation(this,R.anim.success)
+                            main_success_anim.startAnimation(annotation)
+                            var mediaplayer : MediaPlayer?= null
+                            mediaplayer = MediaPlayer.create(this, R.raw.success)
+                            mediaplayer?.start()
+
+
                             Log.e(
                                 "확률은",
                                 " MainSum 은  $MainChangeSum 입니다."
