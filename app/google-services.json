@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "711993979479",
+    "firebase_url": "https://montyhall3doors.firebaseio.com",
+    "project_id": "montyhall3doors",
+    "storage_bucket": "montyhall3doors.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711993979479:android:1e982e2d09e95fb4fea912",
+        "android_client_info": {
+          "package_name": "ko.co.montyhall3doors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711993979479-oeshk1gt14f4kr5u6lcmqdae4o8k1uj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ko.co.montyhall3doors",
+            "certificate_hash": "2c5bd1d4e5138ba99502869f04ed10a2b96448ba"
+          }
+        },
+        {
+          "client_id": "711993979479-0jrsirjk7msv4c779hoia1r25nvght1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfA88TkRhuwXkDSwIWRD4JK-UjYgANcNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711993979479-0jrsirjk7msv4c779hoia1r25nvght1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

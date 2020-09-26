@@ -3,6 +3,8 @@ package ko.co.montyhall3doors
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_auto.view.*
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 class AutoDataViewHolder(v: View) : RecyclerView.ViewHolder(v) {
 

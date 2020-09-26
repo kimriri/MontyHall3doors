@@ -1,5 +1,6 @@
 package ko.co.montyhall3doors
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,15 +8,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_auto_play.*
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_auto_play_popup.*
-import java.util.ArrayList
+import java.util.*
 
 class MainActivity : AppCompatActivity(){
 
@@ -44,10 +47,23 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Fabric.with(this, Crashlytics())
         initializeView()
         RandomNumberGenerator()
         ButtonEventView()
+
+        val crashButton = Button(this)
+        crashButton.setText("Crash!")
+        crashButton.setOnClickListener(View.OnClickListener {
+            Crashlytics.getInstance().crash() // Force a crash
+        })
+        addContentView(
+            crashButton,
+            ActionBar.LayoutParams(
+                ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.WRAP_CONTENT
+            )
+        )
     }
 
     private fun ButtonEventView() {

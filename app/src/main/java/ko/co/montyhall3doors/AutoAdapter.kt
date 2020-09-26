@@ -3,6 +3,8 @@ package ko.co.montyhall3doors
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 class AutoAdapter : RecyclerView.Adapter<AutoDataViewHolder>() {
 
