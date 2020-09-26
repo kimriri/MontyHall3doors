@@ -7,4 +7,4 @@ import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
 @Parcelize
-data class AutoData(val count: String, val success: String, val percentage: String) : Parcelable
+data class AutoData(val count: String, val success: String, val percentage: String,val SuccessOrNot:Boolean) : Parcelable

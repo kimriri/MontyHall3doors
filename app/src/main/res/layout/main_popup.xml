@@ -8,6 +8,7 @@
     <TextView
         android:id="@+id/tv_main_popup"
         android:text="text"
+        android:fontFamily="@font/nanumbarunpenb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

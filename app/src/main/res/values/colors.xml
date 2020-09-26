@@ -6,8 +6,8 @@
         <color name="colorPrimaryDark">#3700B3</color>
         <color name="colorAccent">#03DAC5</color>
         <color name="colorWhite">#FFFFFF</color>
-
-
+        <color name="colorNot">#FDF89494</color>
+        <color name="colorOK">#D262FA5D</color>
 
 
 </resources>

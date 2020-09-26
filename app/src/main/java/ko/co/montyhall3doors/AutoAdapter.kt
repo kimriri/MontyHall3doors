@@ -1,10 +1,10 @@
 package ko.co.montyhall3doors
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import kotlinx.android.synthetic.main.item_auto.view.*
 
 class AutoAdapter : RecyclerView.Adapter<AutoDataViewHolder>() {
 
@@ -23,7 +23,11 @@ class AutoAdapter : RecyclerView.Adapter<AutoDataViewHolder>() {
     override fun onBindViewHolder(holder: AutoDataViewHolder, position: Int) {
         val item = itemList[position]
         holder.apply {
+            when (item.SuccessOrNot) {
+                true -> view.item_auto.setBackgroundColor(Color.parseColor("#D262FA5D"))
+            }
             bind(item)
+
         }
     }
 
@@ -31,6 +35,7 @@ class AutoAdapter : RecyclerView.Adapter<AutoDataViewHolder>() {
         itemList.apply {
             clear()
             addAll(autoDataList)
+
         }
         notifyDataSetChanged()
     }
