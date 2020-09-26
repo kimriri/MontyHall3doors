@@ -3,8 +3,10 @@ package ko.co.montyhall3doors
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_auto_play.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ListActivity : Activity() {
 
@@ -16,5 +18,15 @@ class ListActivity : Activity() {
         val adapter = AutoAdapter()
         AutoPlayRecyCleview.adapter = adapter
         adapter.addItem(autoDataList)
+
+        AutoPlayButtonEventView()
+
     }
+    private fun AutoPlayButtonEventView() {
+
+        btn_auto_play_restart.setOnClickListener {
+            finish()
+        }
+    }
+
 }

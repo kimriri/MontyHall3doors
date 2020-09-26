@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(){
     var MainAutoSum1 = 0
     var MainAutoPercentage: Double = 0.0
     var MainAutoPercentage1: Double = 0.0
-    var MainAutoPercentage2: Double = 0.
+    var MainAutoPercentage2: Double = 0.0
     val autodataList = ArrayList<AutoData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -297,7 +297,6 @@ class MainActivity : AppCompatActivity(){
 
             val strAutoPopCount: String = item.toString()  // 전체
             val strAutoSum: String = MainAutoSum.toString()  // 성공 횟수
-            val strAutoPercentage1: String = MainAutoPercentage1.toString()  //  누적 확률
             val strAutoPercentage2 = String.format("%.2f", MainAutoPercentage2) // //  개별 확률
             val nextIntent = Intent(this, ListActivity::class.java)
             nextIntent.putExtra("AutoPopCount", item)
@@ -326,7 +325,6 @@ class MainActivity : AppCompatActivity(){
 
             val strAutoPopCount: String = item.toString()  // 전체
             val strAutoSum2: String = MainAutoSum1.toString()  // 성공 횟수
-            val strAutoPercentage1: String = MainAutoPercentage1.toString()  //  누적 확률
             val strAutoPercentage2 = String.format("%.2f", MainAutoPercentage2) // //  개별 확률
             val nextIntent = Intent(this, ListActivity::class.java)
             nextIntent.putExtra("AutoPopCount", item)
