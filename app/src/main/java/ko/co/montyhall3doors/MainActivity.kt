@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     var MainNotChangeAutoSum = 0
     var MainAutoAllPercentage: Double = 0.0
     var MainAutoEachPercentage: Double = 0.0
+    var RVColor = 0
 
     val autodataList = ArrayList<AutoData>()
 
@@ -211,9 +212,9 @@ class MainActivity : AppCompatActivity() {
                             // 선택을 바꾸었을때 자동차 이미지인 경우
                             MainChangeSum++
                             main_success_anim.visibility = View.INVISIBLE
-                          val annotation=AnimationUtils.loadAnimation(this,R.anim.success)
+                            val annotation = AnimationUtils.loadAnimation(this, R.anim.success)
                             main_success_anim.startAnimation(annotation)
-                            var mediaplayer : MediaPlayer?= null
+                            var mediaplayer: MediaPlayer? = null
                             mediaplayer = MediaPlayer.create(this, R.raw.success)
                             mediaplayer?.start()
 
@@ -235,7 +236,7 @@ class MainActivity : AppCompatActivity() {
                             || iv_selection1.visibility == View.VISIBLE && MainSupCar == 1
                             || iv_selection2.visibility == View.VISIBLE && MainSupCar == 2
                         ) {
-                            // 선택을 바꾸었을때 자동차 이미지인 경우
+                            // 선택을 바꾸었을때 자동차 이미지인 경우b
                             MainNotChangeSum++
                             Log.e(
                                 "확률은",
@@ -257,7 +258,8 @@ class MainActivity : AppCompatActivity() {
             //MainPercentage2 선택이 바뀌지 않았을때의 확률
 
             MainChangePercentage = (MainChangeSum.toDouble() / MainModifind.toDouble()) * 100
-            MainNotChangePercentage = (MainNotChangeSum.toDouble() / MainNoNModifind.toDouble()) * 100
+            MainNotChangePercentage =
+                (MainNotChangeSum.toDouble() / MainNoNModifind.toDouble()) * 100
 
 
             if (MainChangePercentage.isNaN()) {
@@ -309,6 +311,7 @@ class MainActivity : AppCompatActivity() {
             val MainAutoRandom1 = (0..2).random() // 0
             val MainAutoRandom2 = (0..2).random()  // 1
             var SuccessOrNot: Boolean = true
+
             MainAutoRandomCar = MainAutoRandom1
             MainAutoRandomMySelection = MainAutoRandom2
 
@@ -316,24 +319,25 @@ class MainActivity : AppCompatActivity() {
 
                 true -> {
                     MainChangeAutoSum++
-                    SuccessOrNot
+                    RVColor = R.drawable.rv_item_color
                 }
-                false -> SuccessOrNot = !SuccessOrNot
+                false -> RVColor = R.drawable.rv_item_color_not
             }
             MainAutoEachPercentage = (MainChangeAutoSum.toDouble() / item.toDouble()) * 100
 
 
             val strAutoPopCount: String = item.toString()  // 전체
             val strAutoSum: String = MainChangeAutoSum.toString()  // 성공 횟수
-
+            val strRVColor: Int = RVColor
             val strAutoPercentage2 = String.format("%.2f", MainAutoEachPercentage) // //  개별 확률
             val nextIntent = Intent(this, ListActivity::class.java)
             nextIntent.putExtra("AutoPopCount", item)
             nextIntent.putExtra("AutoSum", strAutoSum)
             nextIntent.putExtra("strAutoPercentage2", strAutoPercentage2)
-            nextIntent.putExtra("strSuccessOrNot", SuccessOrNot)
+            nextIntent.putExtra("strRvColor", strRVColor)
+
             val autodataList1 =
-                AutoData(strAutoPopCount, strAutoSum, "$strAutoPercentage2%", SuccessOrNot)
+                AutoData(strAutoPopCount, strAutoSum, "$strAutoPercentage2%", strRVColor)
             autodataList.add(autodataList1)
         }
     }
@@ -341,6 +345,7 @@ class MainActivity : AppCompatActivity() {
     private fun RandomAutoNumberGeneratorNotChange() {
         autodataList.clear()
         MainNotChangeAutoSum = 0
+
         for (item in 1..MainAutoPopCount) {
             val MainAutoRandom1 = (0..2).random()
             val MainAutoRandom2 = (0..2).random()
@@ -351,9 +356,9 @@ class MainActivity : AppCompatActivity() {
             when (MainAutoRandomCar == MainAutoRandomMySelection) {
                 true -> {
                     MainNotChangeAutoSum++
-                    SuccessOrNot
+                    RVColor = R.drawable.rv_item_color
                 }
-                false -> SuccessOrNot = !SuccessOrNot
+                false -> RVColor = R.drawable.rv_item_color_not
             }
             MainAutoEachPercentage = (MainNotChangeAutoSum.toDouble() / item.toDouble()) * 100
 
@@ -361,13 +366,14 @@ class MainActivity : AppCompatActivity() {
             val strAutoPopCount: String = item.toString()  // 전체
             val strAutoSum2: String = MainNotChangeAutoSum.toString()  // 성공 횟수
             val strAutoPercentage2 = String.format("%.2f", MainAutoEachPercentage) // //  개별 확률
+            val strRVColor: Int = RVColor
             val nextIntent = Intent(this, ListActivity::class.java)
             nextIntent.putExtra("AutoPopCount", item)
             nextIntent.putExtra("AutoSum", strAutoSum2)
             nextIntent.putExtra("strAutoPercentage2", strAutoPercentage2)
-            nextIntent.putExtra("strSuccessOrNot", SuccessOrNot)
+            nextIntent.putExtra("strRvColor", strRVColor)
             val autodataList1 =
-                AutoData(strAutoPopCount, strAutoSum2, "$strAutoPercentage2%", SuccessOrNot)
+                AutoData(strAutoPopCount, strAutoSum2, "$strAutoPercentage2%", strRVColor)
             autodataList.add(autodataList1)
         }
     }
@@ -533,7 +539,8 @@ class MainActivity : AppCompatActivity() {
 
                 initializeView()  // 뷰 초기화
                 RandomAutoNumberGeneratorChange()  // 램덤 반복 으로 실행 하기
-                MainAutoAllPercentage = (MainChangeAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
+                MainAutoAllPercentage =
+                    (MainChangeAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
                 Log.e(
                     "확인인",
                     "램덤 선택버튼은 $MainAutoAllPercentage 입니다. 총 시도 횟수는 $MainAutoPopCount  입니다. MainAutoPopCount는 $MainAutoPopCount MainAutoSum은 $MainChangeAutoSum 입니다."
@@ -559,7 +566,8 @@ class MainActivity : AppCompatActivity() {
 
                 initializeView()  // 뷰 초기화
                 RandomAutoNumberGeneratorNotChange()  // 램덤 반복 으로 실행 하기
-                MainAutoAllPercentage = (MainNotChangeAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
+                MainAutoAllPercentage =
+                    (MainNotChangeAutoSum.toDouble() / MainAutoPopCount.toDouble()) * 100
                 Log.e(
                     "확인인",
                     "램덤 선택버튼은 $MainAutoAllPercentage 입니다. 총 시도 횟수는 $MainAutoPopCount  입니다. MainAutoPopCount는 $MainAutoPopCount MainAutoSum은 $MainNotChangeAutoSum 입니다."

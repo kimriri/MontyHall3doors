@@ -59,5 +59,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/item_tv_color"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/rv_item_color"
+        android:layout_marginEnd="20dp"
+
+        android:layout_weight="1"
+
+        />
+
 
 </LinearLayout>

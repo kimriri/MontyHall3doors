@@ -1,6 +1,7 @@
 package ko.co.montyhall3doors
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -17,7 +18,7 @@ class ListActivity : Activity() {
         setContentView(R.layout.activity_auto_play)
 
         val autoDataList: ArrayList<AutoData> = intent.getParcelableArrayListExtra("AutoDataList")
-        val adapter = AutoAdapter()
+        val adapter = AutoAdapter(this)
         AutoPlayRecyCleview.adapter = adapter
         adapter.addItem(autoDataList)
 
