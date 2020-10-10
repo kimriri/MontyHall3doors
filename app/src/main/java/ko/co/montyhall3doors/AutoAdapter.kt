@@ -13,7 +13,7 @@ class AutoAdapter(private val context: Context) : RecyclerView.Adapter<AutoDataV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AutoDataViewHolder {
         val inflatedView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_auto, parent, false)
+            LayoutInflater.from(parent. context).inflate(R.layout.item_auto, parent, false)
         return AutoDataViewHolder(inflatedView)
     }
 

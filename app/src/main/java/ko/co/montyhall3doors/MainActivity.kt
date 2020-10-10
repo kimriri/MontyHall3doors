@@ -8,14 +8,17 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
+import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_auto_play_popup.*
 import java.util.*
@@ -45,13 +48,30 @@ class MainActivity : AppCompatActivity() {
 
     val autodataList = ArrayList<AutoData>()
 
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Fabric.with(this, Crashlytics())
+        // Obtain the FirebaseAnalytics instance.
+//        Fabric.with(this, Crashlytics())
         initializeView()
         RandomNumberGenerator()
         ButtonEventView()
+
+        FirebaseApp.initializeApp(applicationContext);
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
+
+        val crashButton = Button(this)
+        crashButton.text = "Crash!"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
+        addContentView(crashButton, ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT)
+        )
 
 //        val crashButton = Button(this)
 //        crashButton.setText("Crash!")

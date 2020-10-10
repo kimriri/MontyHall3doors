@@ -8,8 +8,6 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_auto_play.*
 import kotlinx.android.synthetic.main.activity_main.*
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 
 class ListActivity : Activity() {
 
