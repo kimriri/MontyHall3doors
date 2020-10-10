@@ -62,29 +62,17 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(applicationContext);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
 
-        val crashButton = Button(this)
-        crashButton.text = "Crash!"
-        crashButton.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-        }
-
-        addContentView(crashButton, ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
-        )
-
 //        val crashButton = Button(this)
-//        crashButton.setText("Crash!")
-//        crashButton.setOnClickListener(View.OnClickListener {
-//            Crashlytics.getInstance().crash() // Force a crash
-//        })
-//        addContentView(
-//            crashButton,
-//            ActionBar.LayoutParams(
-//                ActionBar.LayoutParams.MATCH_PARENT,
-//                ActionBar.LayoutParams.WRAP_CONTENT
-//            )
+//        crashButton.text = "Crash!"
+//        crashButton.setOnClickListener {
+//            throw RuntimeException("Test Crash") // Force a crash
+//        }
+//
+//        addContentView(crashButton, ViewGroup.LayoutParams(
+//            ViewGroup.LayoutParams.MATCH_PARENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT)
 //        )
+
     }
 
     private fun ButtonEventView() {
