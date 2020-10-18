@@ -30,6 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_main_auto_play" />
+
     <Button
         android:id="@+id/btn_main_auto_play"
         android:layout_width="match_parent"
@@ -47,13 +48,13 @@
         android:id="@+id/tv_main_question0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:fontFamily="@font/nanumbarunpenr"
-        android:textColor="#000000"
+        android:padding="10sp"
         android:text="@string/tv_main_question1"
+        android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btn_main_auto_play"
+        app:layout_constraintStart_toStartOf="@id/btn_main_auto_play"
         app:layout_constraintTop_toBottomOf="@id/btn_main_auto_play" />
 
 
@@ -61,36 +62,37 @@
         android:id="@+id/tv_main_question1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:fontFamily="@font/nanumbarunpenr"
-        android:textColor="#000000"
+        android:lineSpacingExtra="2sp"
+        android:padding="10sp"
         android:text="@string/tv_main_question2"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btn_main_auto_play"
+        app:layout_constraintStart_toStartOf="@id/btn_main_auto_play"
         app:layout_constraintTop_toBottomOf="@id/btn_main_auto_play" />
 
     <TextView
         android:id="@+id/tv_main_question2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:fontFamily="@font/nanumbarunpenr"
-        android:padding="10dp"
-        android:textColor="#000000"
+        android:lineSpacingExtra="2sp"
+        android:padding="10sp"
         android:text="@string/tv_main_question3"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/btn_main_auto_play"
+        app:layout_constraintStart_toStartOf="@id/btn_main_auto_play"
         app:layout_constraintTop_toBottomOf="@id/btn_main_auto_play" />
 
 
     <ImageView
         android:id="@+id/img_door0_back"
-        android:layout_width="41dp"
-        android:layout_height="51dp"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
         android:src="@drawable/goat_64"
         app:layout_constraintBottom_toBottomOf="@+id/img_door0"
         app:layout_constraintEnd_toEndOf="@+id/img_door0"
@@ -101,8 +103,8 @@
 
     <ImageView
         android:id="@+id/img_door1_back"
-        android:layout_width="41dp"
-        android:layout_height="51dp"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
         android:src="@drawable/goat_64"
         app:layout_constraintBottom_toBottomOf="@+id/img_door1"
         app:layout_constraintEnd_toEndOf="@+id/img_door1"
@@ -113,8 +115,8 @@
 
     <ImageView
         android:id="@+id/img_door2_back"
-        android:layout_width="41dp"
-        android:layout_height="51dp"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
         android:src="@drawable/goat_64"
         app:layout_constraintBottom_toBottomOf="@+id/img_door2"
         app:layout_constraintEnd_toEndOf="@+id/img_door2"
@@ -125,7 +127,7 @@
 
     <ImageView
         android:id="@+id/img_door0"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,20 +136,23 @@
 
     <ImageView
         android:id="@+id/img_door1"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="@+id/img_door0"
-        app:layout_constraintStart_toEndOf="@+id/img_door0" />
+        app:layout_constraintEnd_toStartOf="@+id/img_door2"
+        app:layout_constraintStart_toEndOf="@+id/img_door0"
+        app:layout_constraintTop_toTopOf="@+id/img_door0"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/img_door2"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:src="@drawable/closed_door_128bit"
         app:layout_constraintBottom_toBottomOf="@+id/img_door1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_door1" />
+        app:layout_constraintTop_toTopOf="@+id/img_door1" />
 
     <ImageView
         android:id="@+id/iv_selection0"
