@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
@@ -16,15 +15,22 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.main_auto_play_popup.*
 import java.util.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var mAdView : AdView
     var MainNoNModifind: Long = 0
     var MainModifind: Long = 0
     var MainChangeSum: Long = 0
@@ -47,14 +53,25 @@ class MainActivity : AppCompatActivity() {
     var RVColor = 0
 
     val autodataList = ArrayList<AutoData>()
-
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // Obtain the FirebaseAnalytics instance.
-//        Fabric.with(this, Crashlytics())
+
+
+        val adView = AdView(this)
+        adView.adSize = AdSize.BANNER
+        adView.adUnitId = R.string.banner_ad_unit_id.toString()
+       adView.loadAd(AdRequest.Builder().build())
+
+        MobileAds.initialize(this) {}
+
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
+
         initializeView()
         RandomNumberGenerator()
         ButtonEventView()
@@ -73,7 +90,9 @@ class MainActivity : AppCompatActivity() {
 //            ViewGroup.LayoutParams.WRAP_CONTENT)
 //        )
 
+
     }
+
 
     private fun ButtonEventView() {
         btn_next.setOnClickListener {

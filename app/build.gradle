@@ -12,8 +12,8 @@ android {
         applicationId "ko.co.montyhall3doors"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.4"
+        versionCode 9
+        versionName "1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,8 +21,7 @@ android {
     buildTypes {
         debug {
 
-            minifyEnabled true
-
+            minifyEnabled false
 
             // 기본 프로가드 설정
             proguardFile getDefaultProguardFile('proguard-android.txt')
@@ -62,6 +61,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     // Recommended: Add the Google Analytics SDK.
     implementation 'com.google.firebase:firebase-analytics:17.6.0'
+    // 광고
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
